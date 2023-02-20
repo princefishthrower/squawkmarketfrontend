@@ -2,12 +2,15 @@ import * as React from "react";
 import { ActivateFeedButton } from "../../reusable/ActivateFeedButton";
 import { Logo } from "../../reusable/Logo";
 import { PremiumPriceTile } from "../../reusable/PremiumPriceTile";
+import { Sidebar } from "./Sidebar";
 
 export function Home() {
   return (
+    <div className="d-flex flex-row mb-5">
+    <Sidebar/>
     <div className="container">
       <div className="text-center">
-        <Logo size={250} />
+        <Logo size={150} />
       </div>
       <h1 className="text-center font-monospace fw-bold">Squawk Market</h1>
       <h2 className="text-center">
@@ -18,7 +21,7 @@ export function Home() {
           <p className="text-center">
             Our squawk uses a variety of quantitative and qualitative metrics as
             well as a suite of AI tools to provide you the most relevant market
-            data in extremely low ({"<"}1s) latency. Don't miss a single
+            news and data in extremely low ({"<"}1s) latency. Don't miss a single
             momentum trade, market-moving news event, high-impact economic
             release, breaking corporate announcement, or geopolitical
             development. Stay ahead of the game by capitalizing on volatility,
@@ -54,6 +57,7 @@ export function Home() {
           <PremiumPriceTile />
         </div>
       </div>
+    </div>
     </div>
   );
 }

@@ -1,0 +1,25 @@
+[build]
+  command = "export GATSBY_COMMIT_REF=$COMMIT_REF && export GATSBY_BRANCH=$BRANCH && export GATSBY_LAST_BUILD=$(date --iso-8601=seconds) && cd functions && npm install && npm run build && cd .. && npm install --legacy-peer-deps && npm run build"
+  publish = "public"
+  functions = "functions/dist"
+
+[dev]
+  command = "npm run develop"
+  functions = "functions/dist"
+
+[context.staging]
+  environment = { GATSBY_ACTIVE_ENV = "staging", GATSBY_API_URL = "https://api.squawk-market.com" }
+
+[context.production]
+  environment = { GATSBY_ACTIVE_ENV = "production", GATSBY_API_URL = "https://api.squawk-market.com" }
+
+[[plugins]]
+package = 'netlify-plugin-contextual-env'
+  [plugins.inputs]
+  mode = 'suffix'
+
+[[redirects]]
+from = "https://staging--squawk-market.netlify.app/*"
+to = "https://staging.squawk-market.com"
+status = 200
+force = true

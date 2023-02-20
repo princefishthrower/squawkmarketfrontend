@@ -1,3 +1,4 @@
+import { Link } from "gatsby";
 import * as React from "react";
 
 export function PremiumPriceTile() {
@@ -20,7 +21,7 @@ export function PremiumPriceTile() {
         <li>Most active</li>
       </ul>
       <p>All feeds completely customizable and configurable.</p>
-      <button className="btn btn-success">Subscribe</button>
+      <Link to="/subscribe" className="btn btn-success">Subscribe</Link>
     </div>
   );
 }

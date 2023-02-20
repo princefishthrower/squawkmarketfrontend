@@ -7,6 +7,8 @@ const Footer = () => {
   const year = new Date().getFullYear()
 
   return (
+    <>
+    <hr className='m-0'/>
     <div className="container">
       <div className="row justify-content-between my-5">
         <div className="col-12 col-lg-5 my-3 my-lg-0">
@@ -22,29 +24,18 @@ const Footer = () => {
           <div className="container">
             <div className="row justify-content-center justify-content-lg-end">
               <div className="col-12 col-sm-6 col-md-2">
-                <div className="fw-bold my-4">Products</div>
-                <div className="my-3">
-                  <Link to="/zerodte-newsletter">0DTE Newsletter</Link>
-                </div>
-                <div className="my-3">
-                  <Link className="color-green" to="/change-log">
-                    New Features
-                  </Link>
-                </div>
-              </div>
-              <div className="col-12 col-sm-6 col-md-2">
                 <div className="fw-bold my-4">Company</div>
                 <div className="my-3">
                   <a href="https://fullstackcraft.com">Full Stack Craft</a>
                 </div>
-                <div className="my-3">
+                {/* <div className="my-3">
                   <Link to="/about">About Us</Link>
                 </div>
                 <div className="my-3">
                   <Link to="/sitemap">Sitemap</Link>
-                </div>
+                </div> */}
               </div>
-              <div className="col-12 col-sm-6 col-md-2">
+              {/* <div className="col-12 col-sm-6 col-md-2">
                 <div className="fw-bold my-4">Support</div>
                 <div className="my-3">
                   <Link to="/contact">Contact</Link>
@@ -52,7 +43,7 @@ const Footer = () => {
                 <div className="my-3">
                   <Link to="/faqs">Subscription FAQs</Link>
                 </div>
-              </div>
+              </div> */}
               <div className="col-12 col-sm-6 col-md-2">
                 <div className="fw-bold my-4">Socials</div>
                 <div className="my-3">
@@ -73,12 +64,12 @@ const Footer = () => {
               </div>
               <div className="col-12 col-sm-6 col-md-2">
                 <div className="fw-bold my-4">Legal</div>
-                <div className="my-3">
+                {/* <div className="my-3">
                   <Link to="/risk-disclosure">Risk Disclosure</Link>
                 </div>
                 <div className="my-3">
                   <Link to="/terms-and-conditions">Terms of Use</Link>
-                </div>
+                </div> */}
                 <div className="my-3">
                   <a href="https://fullstackcraft.com/privacy-policy" target="_blank" rel="noopener noreferrer">
                     Privacy Policy
@@ -98,7 +89,7 @@ const Footer = () => {
           {process.env.GATSBY_LAST_BUILD?.split('+')[0].replace('T', ' ')}
         </div>
       </div>
-    </div>
+    </div></>
   )
 }
 export default Footer

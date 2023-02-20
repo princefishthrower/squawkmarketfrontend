@@ -12,8 +12,8 @@ const Header = () => {
   
   return (
     <>
-    <header id="header-wrap">
-      <nav className="navbar navbar-expand-lg scrolling-navbar mt-2">
+    <header>
+      <nav className="navbar navbar-expand-lg scrolling-navbar">
         <div className="container">
           <Link to="/" className="me-3 text-decoration-none text-dark">
             <div className="d-flex flex-row align-items-center justify-content-center">
@@ -38,28 +38,20 @@ const Header = () => {
                 </Link>
               </li>
               <li className={'nav-item'}>
-                <Link to="/upgrade" className="fs-5 nav-link">
-                  Upgrade
+                <Link to="/subscribe" className="fs-5 nav-link">
+                  Subscribe
                 </Link>
               </li>
-              <li className={'nav-item'}>
+              {/* <li className={'nav-item'}>
                 <Link to="/blog" className="fs-5 nav-link">
                   Blog
                 </Link>
               </li>
-              <li className="nav-item dropdown me-2">
-                <a
-                  className="fs-5 nav-link"
-                  href="/contact"
-                  id="navbarDropdown"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
+              <li className={'nav-item'}>
+                <Link to="/contact" className="fs-5 nav-link">
                   Contact
-                </a>
-              </li>
+                </Link>
+              </li> */}
               <li className="d-block d-lg-none">
                 <AuthWidget />
               </li>
@@ -68,7 +60,7 @@ const Header = () => {
         </div>
       </nav>
     </header>
-    <hr/>
+    <hr className='m-0'/>
     </>
   )
 }

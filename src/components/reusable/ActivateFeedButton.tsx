@@ -1,20 +1,20 @@
 import * as React from "react";
-import { useState } from "react";
 import { useFreeFeed } from "../../hooks/useFreeFeed";
+import { useAppSelector } from "../../hooks/useAppSelector";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { setIsConnecting, setVolume } from "../../redux/feedSlice";
 
 export function ActivateFeedButton() {
-  const [isActive, setIsActive] = useState(false);
-  const [isConnecting, setIsConnecting] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [volume, setVolume] = useState(5);
+  const { isConnected, isConnecting, isError, volume } = useAppSelector(state => state.feed)
+  const dispatch = useAppDispatch();
 
-  useFreeFeed(isActive, volume, setIsConnecting, setIsError);
+  useFreeFeed();
 
-  const onClickActivateFeed = async () => {
-    setIsActive(true);
+  const onClickActivateFeed = () => {
+    dispatch(setIsConnecting(true));
   };
 
-  const disabled = isActive ? true : false;
+  const disabled = isConnected ? true : false;
 
   const resolveButtonText = () => {
     if (isConnecting) {
@@ -25,15 +25,14 @@ export function ActivateFeedButton() {
       return "Error Connecting!";
     }
 
-    if (isActive) {
+    if (isConnected) {
       return "Connected";
     }
 
-    return <>{"\u2B80"} Activate Feed</>;
+    return <>{"\u2B80"} Connect</>;
   };
 
   const buttonText = resolveButtonText();
-
   return (
     <>
       <button
@@ -43,25 +42,6 @@ export function ActivateFeedButton() {
       >
         {buttonText}
       </button>
-      {isActive && (
-        <div className="d-flex flex-row justify-content-center align-items-center my-3">
-          <label htmlFor="volume">Volume</label>
-          <input
-            className="bg-success mx-2"
-            type="range"
-            id="volume"
-            name="volume"
-            min={0}
-            max={10}
-            value={volume}
-            step={1}
-            onChange={(e) => setVolume(parseInt(e.target.value))}
-          />
-          <button className="btn btn-secondary" onClick={() => setVolume(0)}>
-            Mute
-          </button>
-        </div>
-      )}
     </>
   );
 }
