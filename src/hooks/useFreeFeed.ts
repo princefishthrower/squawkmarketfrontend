@@ -18,7 +18,6 @@ export const useFreeFeed = (
   );
 
   const onFreeFeedMessage = (item: IFeedItem) => {
-    console.log(`Adding item!`);
     dispatch(appendToItems(item));
     queueRef.current.add({
       mp3Data: item.mp3data,
@@ -28,7 +27,6 @@ export const useFreeFeed = (
 
   // on mount ensure that we are not connecting or connected
   useEffect(() => {
-    console.log("useFreeFeed: on mount (ensure not connecting or connected)");
     dispatch(setIsConnecting(false));
     dispatch(setIsConnected(false));
     dispatch(setIsError(false));
@@ -37,7 +35,6 @@ export const useFreeFeed = (
 
   useEffect(() => {
     if (isConnecting) {
-      console.log('stargin!!!!!')
       connectionRef.current
         .start()
         .then(() => {
