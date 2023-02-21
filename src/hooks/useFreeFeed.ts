@@ -74,6 +74,7 @@ export const useFreeFeed = () => {
           dispatch(setIsConnected(true));
         })
         .catch(() => {
+          console.log('connection error')
           dispatch(setIsConnecting(false));
           dispatch(setIsError(true));
           dispatch(setIsConnected(false));
