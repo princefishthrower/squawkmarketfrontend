@@ -1,9 +1,9 @@
 .sidebar-height {
-  max-height: 1200px;
+  height: 1200px;
 }
 
 @include media-breakpoint-down(xl) {
   .sidebar-height {
-    max-height: none;
+    height: 100%;
   }
 }
