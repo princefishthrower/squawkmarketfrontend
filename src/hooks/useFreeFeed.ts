@@ -79,6 +79,9 @@ export const useFreeFeed = () => {
   // while we are connected, useInterval to enqueue the advertisement mp3 every 10 minutes
   useInterval(
     () => {
+      // clear the queue
+      queueRef.current.removeAll();
+      // add the advertisement mp3
       queueRef.current.add({
         sourceType: "url",
         source: "/advertisement.mp3",
