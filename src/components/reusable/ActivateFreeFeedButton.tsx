@@ -13,7 +13,7 @@ export function ActivateFreeFeedButton() {
     dispatch(setIsConnecting(true));
   };
 
-  const disabled = isConnected ? true : false;
+  const disabled = isConnected || isConnecting ? true : false;
 
   const resolveButtonText = () => {
     if (isConnecting) {
