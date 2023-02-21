@@ -10,7 +10,7 @@ export interface IFeedItemTileProps {
 export function FeedItemTile(props: IFeedItemTileProps) {
   const { item } = props;
   const { volume } = useAppSelector((state) => state.feed);
-  const { headline, mp3data, url, created_at } = item;
+  const { headline, mp3data, created_at } = item;
 
   const onClickReplay = () => {
     playBase64StringWithVolume(mp3data, volume, () => {});

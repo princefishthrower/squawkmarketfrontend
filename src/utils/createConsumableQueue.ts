@@ -4,12 +4,14 @@ import { playUrlWithVolume } from "./playUrlWithVolume";
 import { sleep } from "./sleep";
 
 export const createConsumableQueue = () => {
-  let queue: IFeedData[] = [];
+  console.log('creating consuumable queue')
+  const queue: IFeedData[] = [];
   localStorage.setItem("IS_AUDIO_PLAYING", "false");
 
   function add(item: IFeedData) {
     // only add if we are sure the item headline is not already in the queue
     if (queue.find((q) => q.headline === item.headline)) {
+      console.log('already found headline, returning')
       return;
     }
     queue.push(item);
@@ -20,7 +22,7 @@ export const createConsumableQueue = () => {
   }
 
   function removeAll() {
-    queue = [];
+    queue.splice(0, queue.length);
   }
 
   async function processQueue() {
