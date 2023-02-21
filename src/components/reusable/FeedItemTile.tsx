@@ -16,17 +16,22 @@ export function FeedItemTile(props: IFeedItemTileProps) {
     playBase64StringWithVolume(mp3data, volume, () => {});
   };
 
+  // get EST time from created_at
+  const estTime = new Date(created_at).toLocaleTimeString("en-US", {
+    timeZone: "America/New_York",
+  });
+
   return (
     <div className="d-flex flex-column justify-content-between p-3 mb-3 rounded bg-light text-dark">
       <div className="text-muted">{`${new Date(
         created_at
       ).toLocaleDateString()} ${new Date(
         created_at
-      ).toLocaleTimeString()}`}</div>
+      ).toLocaleTimeString()} Local / ${estTime} EST`}</div>
       <div>{headline}</div>
-      <a className="my-3" href={url} target="_blank" rel="noreferrer noopener">
+      {/* <a className="my-3" href={url} target="_blank" rel="noreferrer noopener">
         Link to article
-      </a>
+      </a> */}
       <button className="btn btn-primary" onClick={onClickReplay}>
         {"\u2B80"} Replay
       </button>
