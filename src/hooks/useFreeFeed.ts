@@ -45,6 +45,7 @@ export const useFreeFeed = () => {
     const connection = new signalR.HubConnectionBuilder()
       .withUrl(`${process.env.GATSBY_API_URL}/feed`)
       .withAutomaticReconnect()
+      .withHubProtocol(new signalR.JsonHubProtocol())
       .configureLogging(signalR.LogLevel.Information)
       .build();
     connection.on("freeFeedMessage", onFreeFeedMessage);
