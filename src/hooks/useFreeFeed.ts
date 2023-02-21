@@ -80,9 +80,6 @@ export const useFreeFeed = () => {
           dispatch(setIsConnected(false));
         });
     }
-    return () => {
-      connection?.stop();
-    };
   }, [isConnecting]);
 
   // while we are connected, useInterval to enqueue the advertisement mp3 every 10 minutes
