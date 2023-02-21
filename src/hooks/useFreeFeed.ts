@@ -1,10 +1,9 @@
 import { IFeedItem } from "./../interfaces/IFeedItem";
 import { useAppDispatch } from "./useAppDispatch";
 import {
-  IConsumableQueue,
   createConsumableQueue,
 } from "./../utils/createConsumableQueue";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import * as signalR from "@microsoft/signalr";
 import { useAppSelector } from "./useAppSelector";
 import {
@@ -21,14 +20,21 @@ export const useFreeFeed = () => {
     (state) => state.feed
   );
   const dispatch = useAppDispatch();
-  const [queue, setQueue] = useState<IConsumableQueue>();
-  const [connection, setConnection] = useState<signalR.HubConnection>();
+  const queueRef = useRef(createConsumableQueue());
+  const connectionRef = useRef(
+    new signalR.HubConnectionBuilder()
+      .withUrl(`${process.env.GATSBY_API_URL}/feed`)
+      .withAutomaticReconnect({ nextRetryDelayInMilliseconds: () => 5000 })
+      .withHubProtocol(new signalR.JsonHubProtocol())
+      .configureLogging(signalR.LogLevel.Information)
+      .build()
+  );
 
   const onFreeFeedMessage = (item: IFeedItem) => {
     console.log("onFreeFeedMessage", item);
-    console.log('queue is: ', queue)
+    console.log("queue is: ", queueRef.current);
     dispatch(appendToItems(item));
-    queue?.add({
+    queueRef.current.add({
       sourceType: "base64",
       source: item.mp3data,
       volume,
@@ -36,46 +42,37 @@ export const useFreeFeed = () => {
     });
   };
 
+  connectionRef.current.on("freeFeedMessage", onFreeFeedMessage);
+  connectionRef.current.onclose(() => {
+    dispatch(setIsConnecting(false));
+    dispatch(setIsConnected(false));
+  });
+
   // on mount ensure that we are not connecting or connected
   useEffect(() => {
     dispatch(setIsConnecting(false));
     dispatch(setIsConnected(false));
     dispatch(setIsError(false));
     dispatch(setVolume(5));
-    setQueue(createConsumableQueue());
-    const connection = new signalR.HubConnectionBuilder()
-      .withUrl(`${process.env.GATSBY_API_URL}/feed`)
-      .withAutomaticReconnect({ nextRetryDelayInMilliseconds: () => 5000})
-      .withHubProtocol(new signalR.JsonHubProtocol())
-      .configureLogging(signalR.LogLevel.Information)
-      .build();
-    connection.on("freeFeedMessage", onFreeFeedMessage);
-    connection.onclose(() => {
-      dispatch(setIsConnecting(false));
-      dispatch(setIsConnected(false));
-    });
-    setConnection(connection);
     return () => {
       dispatch(setIsConnecting(false));
       dispatch(setIsConnected(false));
       dispatch(setIsError(false));
       dispatch(setVolume(5));
-      setQueue(undefined);
-      setConnection(undefined);
     };
   }, []);
 
   useEffect(() => {
     if (isConnecting) {
       console.log("starting connection");
-      connection
-        ?.start()
+      connectionRef.current
+        .start()
         .then(() => {
           dispatch(setIsConnecting(false));
           dispatch(setIsConnected(true));
         })
         .catch(() => {
-          console.log('connection error')
+          console.log("connection error");
           dispatch(setIsConnecting(false));
           dispatch(setIsError(true));
           dispatch(setIsConnected(false));
@@ -86,7 +83,7 @@ export const useFreeFeed = () => {
   // while we are connected, useInterval to enqueue the advertisement mp3 every 10 minutes
   useInterval(
     () => {
-      queue?.add({
+      queueRef.current.add({
         sourceType: "url",
         source: "/advertisement.mp3",
         volume,

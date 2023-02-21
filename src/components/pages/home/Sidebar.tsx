@@ -35,7 +35,7 @@ export function Sidebar() {
 
   return (
     <div
-      className="d-flex flex-column flex-shrink-0 bg-dark text-light h-100 overflow-auto"
+      className="sidebar-height d-flex flex-column flex-shrink-0 bg-dark text-light overflow-auto"
     >
       <div className="my-3 font-monospace text-center">Live feed</div>
       <div className="text-center">
