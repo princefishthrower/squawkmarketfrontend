@@ -31,8 +31,6 @@ export const useFreeFeed = () => {
   );
 
   const onFreeFeedMessage = (item: IFeedItem) => {
-    console.log("onFreeFeedMessage", item);
-    console.log("queue is: ", queueRef.current);
     dispatch(appendToItems(item));
     queueRef.current.add({
       sourceType: "base64",
@@ -64,7 +62,6 @@ export const useFreeFeed = () => {
 
   useEffect(() => {
     if (isConnecting) {
-      console.log("starting connection");
       connectionRef.current
         .start()
         .then(() => {
@@ -72,7 +69,6 @@ export const useFreeFeed = () => {
           dispatch(setIsConnected(true));
         })
         .catch(() => {
-          console.log("connection error");
           dispatch(setIsConnecting(false));
           dispatch(setIsError(true));
           dispatch(setIsConnected(false));
