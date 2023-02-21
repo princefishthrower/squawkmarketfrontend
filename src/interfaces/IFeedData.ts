@@ -1,4 +1,5 @@
 export interface IFeedData {
-    mp3Data: string;
+    sourceType: "base64" | "url";
+    source: string; // this can be a base64 or a url, depending on 
     volume: number;
 }

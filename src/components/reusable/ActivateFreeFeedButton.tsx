@@ -2,10 +2,12 @@ import * as React from "react";
 import { useFreeFeed } from "../../hooks/useFreeFeed";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
-import { setIsConnecting, setVolume } from "../../redux/feedSlice";
+import { setIsConnecting } from "../../redux/feedSlice";
 
-export function ActivateFeedButton() {
-  const { isConnected, isConnecting, isError, volume } = useAppSelector(state => state.feed)
+export function ActivateFreeFeedButton() {
+  const { isConnected, isConnecting, isError } = useAppSelector(
+    (state) => state.feed
+  );
   const dispatch = useAppDispatch();
 
   useFreeFeed();
@@ -34,14 +36,12 @@ export function ActivateFeedButton() {
 
   const buttonText = resolveButtonText();
   return (
-    <>
-      <button
-        disabled={disabled}
-        className="btn btn-success"
-        onClick={onClickActivateFeed}
-      >
-        {buttonText}
-      </button>
-    </>
+    <button
+      disabled={disabled}
+      className="btn btn-success"
+      onClick={onClickActivateFeed}
+    >
+      {buttonText}
+    </button>
   );
 }

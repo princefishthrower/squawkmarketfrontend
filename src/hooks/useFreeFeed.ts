@@ -5,10 +5,11 @@ import { useEffect, useRef } from "react";
 import * as signalR from "@microsoft/signalr";
 import { useAppSelector } from "./useAppSelector";
 import { appendToItems, setIsConnected, setIsConnecting, setIsError, setVolume } from '../redux/feedSlice';
+import useInterval from './useInterval';
 
 export const useFreeFeed = (
 ) => {
-  const { isConnecting, volume } = useAppSelector(state => state.feed);
+  const { isConnecting, isConnected, volume } = useAppSelector(state => state.feed);
   const dispatch = useAppDispatch();
   const queueRef = useRef(createConsumableQueue());
   const connectionRef = useRef(
@@ -20,7 +21,8 @@ export const useFreeFeed = (
   const onFreeFeedMessage = (item: IFeedItem) => {
     dispatch(appendToItems(item));
     queueRef.current.add({
-      mp3Data: item.mp3data,
+      sourceType: "base64",
+      source: item.mp3data,
       volume,
     });
   };
@@ -47,7 +49,6 @@ export const useFreeFeed = (
           dispatch(setIsConnected(false));
         });
       connectionRef.current.on("freeFeedMessage", onFreeFeedMessage);
-
       connectionRef.current.onclose(() => {
         dispatch(setIsConnecting(false));
         dispatch(setIsConnected(false));
@@ -57,5 +58,15 @@ export const useFreeFeed = (
       // connectionRef.current.stop();
     }
   }, [isConnecting]);
+
+
+  // while we are connected, useInterval to enqueue the advertisement mp3 every 5 minutes
+  useInterval(() => {
+    queueRef.current.add({
+      sourceType: "url",
+      source: '/advertisement.mp3',
+      volume,
+    });
+  }, isConnected ? 300000 : null);
 };
 

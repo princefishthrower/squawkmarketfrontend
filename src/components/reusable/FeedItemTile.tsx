@@ -1,6 +1,6 @@
 import * as React from "react";
 import { IFeedItem } from "../../interfaces/IFeedItem";
-import { playWithVolume } from "../../utils/playWithVolume";
+import { playBase64StringWithVolume } from "../../utils/playBase64StringWithVolume";
 import { useAppSelector } from "../../hooks/useAppSelector";
 
 export interface IFeedItemTileProps {
@@ -13,7 +13,7 @@ export function FeedItemTile(props: IFeedItemTileProps) {
   const { headline, mp3data, url } = item;
 
   const onClickReplay = () => {
-    playWithVolume(mp3data, volume);
+    playBase64StringWithVolume(mp3data, volume, () => {});
   };
 
   return (

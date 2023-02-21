@@ -85,7 +85,7 @@ const Footer = () => {
           © {year} 👨‍💻&nbsp;&nbsp;with ❤️&nbsp;&nbsp;by <a href="https://fullstackcraft.com">Full Stack Craft</a>
         </div>
         <div className="col-12 col-lg-6 col-md-6 text-center text-md-end">
-          {process.env.GATSBY_PRODUCT_NAME} Client v1.0.0-{process.env.GATSBY_BRANCH}-{process.env.GATSBY_COMMIT_REF?.slice(0, 7)}{' '}
+          {process.env.GATSBY_PRODUCT_NAME} v1.0.0-{process.env.GATSBY_BRANCH}-{process.env.GATSBY_COMMIT_REF?.slice(0, 7)}{' '}
           {process.env.GATSBY_LAST_BUILD?.split('+')[0].replace('T', ' ')}
         </div>
       </div>

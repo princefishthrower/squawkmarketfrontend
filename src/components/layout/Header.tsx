@@ -28,7 +28,7 @@ const Header = () => {
             type="button"
             aria-label="Toggle navigation"
           >
-            <i className="lni lni-menu color-blue"></i>
+            {'\u25BC'}
           </button>
           <div className={isCollapsed ? 'collapse navbar-collapse' : 'navbar-collapse collapse show'} id="navbarCollapse">
             <ul className="navbar-nav me-auto w-100 justify-content-start text-center text-lg-start flex-wrap mt-3 mt-lg-0">
