@@ -24,6 +24,7 @@ export const useFreeFeed = (
       sourceType: "base64",
       source: item.mp3data,
       volume,
+      headline: item.headline,
     });
   };
 
@@ -60,13 +61,14 @@ export const useFreeFeed = (
   }, [isConnecting]);
 
 
-  // while we are connected, useInterval to enqueue the advertisement mp3 every 5 minutes
+  // while we are connected, useInterval to enqueue the advertisement mp3 every 10 minutes
   useInterval(() => {
     queueRef.current.add({
       sourceType: "url",
       source: '/advertisement.mp3',
       volume,
+      headline: 'Advertisement',
     });
-  }, isConnected ? 300000 : null);
+  }, isConnected ? 600000 : null);
 };
 

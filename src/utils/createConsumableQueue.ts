@@ -8,6 +8,10 @@ export const createConsumableQueue = () => {
   localStorage.setItem("IS_AUDIO_PLAYING", "false");
 
   function add(item: IFeedData) {
+    // only add if we are sure the item headline is not already in the queue
+    if (queue.find((q) => q.headline === item.headline)) {
+      return;
+    }
     queue.push(item);
     if (localStorage.getItem("IS_AUDIO_PLAYING") === "false") {
       console.log("processing queue");
