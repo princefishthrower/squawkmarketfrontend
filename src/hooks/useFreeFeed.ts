@@ -26,6 +26,7 @@ export const useFreeFeed = () => {
 
   const onFreeFeedMessage = (item: IFeedItem) => {
     console.log("onFreeFeedMessage", item);
+    console.log('queue is: ', queue)
     dispatch(appendToItems(item));
     queue?.add({
       sourceType: "base64",
@@ -44,7 +45,7 @@ export const useFreeFeed = () => {
     setQueue(createConsumableQueue());
     const connection = new signalR.HubConnectionBuilder()
       .withUrl(`${process.env.GATSBY_API_URL}/feed`)
-      .withAutomaticReconnect()
+      .withAutomaticReconnect({ nextRetryDelayInMilliseconds: () => 5000})
       .withHubProtocol(new signalR.JsonHubProtocol())
       .configureLogging(signalR.LogLevel.Information)
       .build();
