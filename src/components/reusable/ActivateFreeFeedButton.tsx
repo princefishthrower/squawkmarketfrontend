@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useFreeFeed } from "../../hooks/useFreeFeed";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { setIsConnecting } from "../../redux/feedSlice";
@@ -9,8 +8,6 @@ export function ActivateFreeFeedButton() {
     (state) => state.feed
   );
   const dispatch = useAppDispatch();
-
-  useFreeFeed();
 
   const onClickActivateFeed = () => {
     dispatch(setIsConnecting(true));

@@ -3,8 +3,13 @@ import { ActivateFreeFeedButton } from "../../reusable/ActivateFreeFeedButton";
 import { Logo } from "../../reusable/Logo";
 import { PremiumPriceTile } from "../../reusable/PremiumPriceTile";
 import { Sidebar } from "./Sidebar";
+import { useFreeFeed } from "../../../hooks/useFreeFeed";
 
 export function Home() {
+
+  // this should only be called once or we run into dupe feed issues
+  useFreeFeed();
+
   return (
     <div className="container-fluid">
       <div className="row">

@@ -47,7 +47,6 @@ export const useFreeFeed = () => {
       .withAutomaticReconnect()
       .configureLogging(signalR.LogLevel.Information)
       .build();
-
     connection.on("freeFeedMessage", onFreeFeedMessage);
     connection.onclose(() => {
       dispatch(setIsConnecting(false));

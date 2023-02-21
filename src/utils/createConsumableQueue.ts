@@ -9,7 +9,7 @@ export interface IConsumableQueue {
 }
 
 export const createConsumableQueue = () => {
-  console.log("creating consuumable queue");
+  console.log("creating consumable queue");
   const queue: IFeedData[] = [];
   localStorage.setItem("IS_AUDIO_PLAYING", "false");
 
