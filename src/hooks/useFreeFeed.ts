@@ -19,6 +19,7 @@ export const useFreeFeed = (
   );
 
   const onFreeFeedMessage = (item: IFeedItem) => {
+    console.log("onFreeFeedMessage", item)
     dispatch(appendToItems(item));
     queueRef.current.add({
       sourceType: "base64",
