@@ -42,13 +42,18 @@ export const useFreeFeed = () => {
     dispatch(setIsError(false));
     dispatch(setVolume(5));
     setQueue(createConsumableQueue());
-    setConnection(
-      new signalR.HubConnectionBuilder()
-        .withUrl(`${process.env.GATSBY_API_URL}/feed`)
-        .withAutomaticReconnect()
-        .configureLogging(signalR.LogLevel.Information)
-        .build()
-    );
+    const connection = new signalR.HubConnectionBuilder()
+      .withUrl(`${process.env.GATSBY_API_URL}/feed`)
+      .withAutomaticReconnect()
+      .configureLogging(signalR.LogLevel.Information)
+      .build();
+
+    connection.on("freeFeedMessage", onFreeFeedMessage);
+    connection.onclose(() => {
+      dispatch(setIsConnecting(false));
+      dispatch(setIsConnected(false));
+    });
+    setConnection(connection);
     return () => {
       dispatch(setIsConnecting(false));
       dispatch(setIsConnected(false));
@@ -61,6 +66,7 @@ export const useFreeFeed = () => {
 
   useEffect(() => {
     if (isConnecting) {
+      console.log("starting connection");
       connection
         ?.start()
         .then(() => {
@@ -72,14 +78,9 @@ export const useFreeFeed = () => {
           dispatch(setIsError(true));
           dispatch(setIsConnected(false));
         });
-      connection?.on("freeFeedMessage", onFreeFeedMessage);
-      connection?.onclose(() => {
-        dispatch(setIsConnecting(false));
-        dispatch(setIsConnected(false));
-      });
     }
     return () => {
-      // connectionRef.current.stop();
+      connection?.stop();
     };
   }, [isConnecting]);
 
