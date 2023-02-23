@@ -11,7 +11,7 @@
   environment = { GATSBY_ACTIVE_ENV = "staging", GATSBY_API_URL = "https://api.squawk-market.com" }
 
 [context.production]
-  environment = { GATSBY_ACTIVE_ENV = "production", GATSBY_API_URL = "https://api.squawk-market.com" }
+  environment = { GATSBY_ACTIVE_ENV = "production", GATSBY_API_URL = "https://api.squawk-market.com", GATSBY_STRIPE_PAYMENT_URL = "https://buy.stripe.com/5kA4gVa3z6lggPC5kk", GATSBY_STRIPE_CUSTOMER_PORTAL_URL = "https://billing.stripe.com/p/login/6oE4hbdk29Ap2GYaEE", GATSBY_SUPABASE_URL = "https://unukydbvalivwbhkvvvd.supabase.co", GATSBY_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVudWt5ZGJ2YWxpdndiaGt2dnZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzcwNjIyMDEsImV4cCI6MTk5MjYzODIwMX0.HCrRwWaHe96iTn53MXkWhW6q2Dvk8DnFUDPIakG9CR0" }
 
 [[plugins]]
 package = 'netlify-plugin-contextual-env'
