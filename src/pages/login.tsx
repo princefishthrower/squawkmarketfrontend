@@ -1,19 +1,19 @@
 import * as React from "react";
 import Layout from "../components/layout/Layout";
 import SEO from "../components/reusable/SEO";
-import { Contact } from "../components/pages/contact/Contact";
+import { Login } from "../components/pages/login/Login";
 
 export const Head = () => (
   <SEO
-    title={"Contact"}
-    description={`Contact the Squawk Market team.`}
+    title={"Login"}
+    description={`Login to Squawk Market.`}
   />
 );
 
-export default function ContactPage() {
+export default function PricingPage() {
   return (
     <Layout>
-      <Contact />
+      <Login />
     </Layout>
   );
 }

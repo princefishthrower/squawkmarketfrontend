@@ -1,46 +1,34 @@
-import { IFeedItem } from "./../interfaces/IFeedItem";
 import { useAppDispatch } from "./useAppDispatch";
 import {
   createConsumableQueue,
-} from "./../utils/createConsumableQueue";
+} from "../utils/createConsumableQueue";
 import { useEffect, useRef } from "react";
 import * as signalR from "@microsoft/signalr";
 import { useAppSelector } from "./useAppSelector";
 import {
-  appendToItems,
   setIsConnected,
   setIsConnecting,
   setIsError,
   setVolume,
 } from "../redux/feedSlice";
 import useInterval from "./useInterval";
+import { getAccessToken } from "../utils/getAccessToken";
 
-export const useFreeFeed = () => {
-  const { isConnecting, isConnected, volume } = useAppSelector(
+export const useFeedConnection = (connect: boolean, withAds: boolean) => {
+  const { isConnected, volume } = useAppSelector(
     (state) => state.feed
   );
   const dispatch = useAppDispatch();
   const queueRef = useRef(createConsumableQueue());
   const connectionRef = useRef(
     new signalR.HubConnectionBuilder()
-      .withUrl(`${process.env.GATSBY_API_URL}/feed`)
+      .withUrl(`${process.env.GATSBY_API_URL}/feeds`, {accessTokenFactory: () => getAccessToken()})
       .withAutomaticReconnect({ nextRetryDelayInMilliseconds: () => 5000 })
       .withHubProtocol(new signalR.JsonHubProtocol())
       .configureLogging(signalR.LogLevel.Information)
       .build()
   );
-
-  const onFreeFeedMessage = (item: IFeedItem) => {
-    dispatch(appendToItems(item));
-    queueRef.current.add({
-      sourceType: "base64",
-      source: item.mp3data,
-      volume,
-      headline: item.headline,
-    });
-  };
-
-  connectionRef.current.on("freeFeedMessage", onFreeFeedMessage);
+  
   connectionRef.current.onclose(() => {
     dispatch(setIsConnecting(false));
     dispatch(setIsConnected(false));
@@ -61,7 +49,7 @@ export const useFreeFeed = () => {
   }, []);
 
   useEffect(() => {
-    if (isConnecting) {
+    if (connect) {
       connectionRef.current
         .start()
         .then(() => {
@@ -74,8 +62,9 @@ export const useFreeFeed = () => {
           dispatch(setIsConnected(false));
         });
     }
-  }, [isConnecting]);
+  }, [connect]);
 
+  // when withAds is true:
   // while we are connected, useInterval to enqueue the advertisement mp3 every 10 minutes
   useInterval(
     () => {
@@ -86,9 +75,12 @@ export const useFreeFeed = () => {
         sourceType: "url",
         source: "/advertisement.mp3",
         volume,
-        headline: "Advertisement",
+        squawk: "Advertisement",
+        link: null
       });
     },
-    isConnected ? 600000 : null
+    withAds && isConnected ? 600000 : null
   );
+
+  return {queueRef, connectionRef}
 };

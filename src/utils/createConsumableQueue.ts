@@ -3,18 +3,17 @@ import { playBase64StringWithVolume } from "./playBase64StringWithVolume";
 import { playUrlWithVolume } from "./playUrlWithVolume";
 import { sleep } from "./sleep";
 
-export interface IConsumableQueue {
-  add: (item: IFeedData) => void;
-  removeAll: () => void;
-}
-
 export const createConsumableQueue = () => {
   const queue: IFeedData[] = [];
   localStorage.setItem("IS_AUDIO_PLAYING", "false");
 
   function add(item: IFeedData) {
-    // only add if we are sure the item headline is not already in the queue
-    if (queue.find((q) => q.headline === item.headline)) {
+    // if item has empty squawk, do not add to queue
+    if (!item.squawk) {
+      return;
+    }
+    // only add if we are sure the item squawk is not already in the queue
+    if (queue.find((q) => q.squawk === item.squawk)) {
       return;
     }
     queue.push(item);

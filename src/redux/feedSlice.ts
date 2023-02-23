@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IFeedItem } from "../interfaces/IFeedItem";
+import { ISquawk } from "../interfaces/IFeedItem";
 import { uniqueByKey } from "../utils/uniqueByKey";
 
 type FeedState = {
   isConnected: boolean;
   isConnecting: boolean;
   isError: boolean;
-  items: Array<IFeedItem>;
+  items: Array<ISquawk>;
   volume: number;
 };
 
@@ -22,16 +22,16 @@ export const feedSlice = createSlice({
   name: "feed",
   initialState: feedInitialState,
   reducers: {
-    setItems: (state, action: PayloadAction<Array<IFeedItem>>) => {
-      state.items = uniqueByKey(action.payload, "headline").sort(
+    setItems: (state, action: PayloadAction<Array<ISquawk>>) => {
+      state.items = uniqueByKey(action.payload, "squawk").sort(
         (a, b) =>
           new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
       );
     },
-    appendToItems: (state, action: PayloadAction<IFeedItem>) => {
+    appendToItems: (state, action: PayloadAction<ISquawk>) => {
       state.items = uniqueByKey(
         [...state.items, action.payload],
-        "headline"
+        "squawk"
       ).sort(
         (a, b) =>
           new Date(b.created_at).getTime() - new Date(a.created_at).getTime()

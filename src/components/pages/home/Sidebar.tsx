@@ -2,7 +2,6 @@ import * as React from "react";
 import { useAppSelector } from "../../../hooks/useAppSelector";
 import { FeedItemTile } from "../../reusable/FeedItemTile";
 import { FeedControls } from "../../reusable/FeedControls";
-import { ActivateFreeFeedButton } from "../../reusable/ActivateFreeFeedButton";
 
 export function Sidebar() {
   const { isConnected, items } = useAppSelector((state) => state.feed);
@@ -12,7 +11,7 @@ export function Sidebar() {
       return (
         <>
           {items.map((item) => (
-            <FeedItemTile key={item.headline} item={item} />
+            <FeedItemTile key={item.created_at} item={item} />
           ))}
         </>
       );
@@ -28,7 +27,7 @@ export function Sidebar() {
 
     return (
       <div className="p-3 mb-3 rounded bg-light text-dark">
-        Waiting to connect...
+        Squawks will begin collecting here as soon as you connect.
       </div>
     );
   };
@@ -37,10 +36,7 @@ export function Sidebar() {
     <div
       className="sidebar-height d-flex flex-column flex-shrink-0 bg-dark text-light overflow-auto"
     >
-      <div className="my-3 font-monospace text-center">Live feed</div>
-      <div className="text-center">
-        <ActivateFreeFeedButton/>
-      </div>
+      <div className="my-3 font-monospace text-center">Live Feed Items</div>
       <FeedControls/>
       <div className="m-3">{resolveContent()}</div>
     </div>

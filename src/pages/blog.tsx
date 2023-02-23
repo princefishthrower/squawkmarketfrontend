@@ -4,8 +4,8 @@ import SEO from "../components/reusable/SEO";
 
 export const Head = () => (
   <SEO
-    title={"Home"}
-    description={`${process.env.GATSBY_PRODUCT_NAME} scans and screens the entire options market daily so you can compare and contrast options with a data-driven approach at a market-wide scale.`}
+    title={"Blog"}
+    description={`The Squawk Market blog.`}
   />
 );
 

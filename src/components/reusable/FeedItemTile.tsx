@@ -1,16 +1,16 @@
 import * as React from "react";
-import { IFeedItem } from "../../interfaces/IFeedItem";
+import { ISquawk } from "../../interfaces/IFeedItem";
 import { playBase64StringWithVolume } from "../../utils/playBase64StringWithVolume";
 import { useAppSelector } from "../../hooks/useAppSelector";
 
 export interface IFeedItemTileProps {
-  item: IFeedItem;
+  item: ISquawk;
 }
 
 export function FeedItemTile(props: IFeedItemTileProps) {
   const { item } = props;
   const { volume } = useAppSelector((state) => state.feed);
-  const { headline, mp3data, created_at } = item;
+  const { squawk, mp3data, created_at, link } = item;
 
   const onClickReplay = () => {
     playBase64StringWithVolume(mp3data, volume, () => {});
@@ -28,10 +28,10 @@ export function FeedItemTile(props: IFeedItemTileProps) {
       ).toLocaleDateString()} ${new Date(
         created_at
       ).toLocaleTimeString()} Local / ${estTime} EST`}</div>
-      <div>{headline}</div>
-      {/* <a className="my-3" href={url} target="_blank" rel="noreferrer noopener">
+      <div className="my-3">{squawk}</div>
+      {link && <a className="my-3" href={link} target="_blank" rel="noreferrer noopener">
         Link to article
-      </a> */}
+      </a>}
       <button className="btn btn-primary" onClick={onClickReplay}>
         {"\u2B80"} Replay
       </button>

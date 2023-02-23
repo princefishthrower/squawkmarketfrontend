@@ -1,14 +1,24 @@
 import * as React from "react";
-import { ActivateFreeFeedButton } from "../../reusable/ActivateFreeFeedButton";
 import { Logo } from "../../reusable/Logo";
 import { PremiumPriceTile } from "../../reusable/PremiumPriceTile";
 import { Sidebar } from "./Sidebar";
-import { useFreeFeed } from "../../../hooks/useFreeFeed";
+import { useFeedConnection } from "../../../hooks/useFeedConnection";
+import { useConnectToFeedByName } from "../../../hooks/useConnectToFeedByName";
+import { useState } from "react";
+import { ActivateButton } from "../dashboard/components/ActivateButton";
+import { useAppSelector } from "../../../hooks/useAppSelector";
+import { useAppDispatch } from "../../../hooks/useAppDispatch";
 
 export function Home() {
+  const { volume } = useAppSelector(state => state.feed);
+  const dispatch = useAppDispatch();
+  const [isActivated, setIsActivated] = useState(false);
 
-  // this should only be called once or we run into dupe feed issues
-  useFreeFeed();
+  // get a connection ref with ads
+  const {queueRef, connectionRef} = useFeedConnection(isActivated, true);
+
+  // connect to the free feed
+  useConnectToFeedByName(queueRef, volume, connectionRef, "market-wide", isActivated, dispatch)
 
   return (
     <div className="container-fluid">
@@ -27,10 +37,10 @@ export function Home() {
           <div className="row justify-content-center">
             <div className="col-12 col-md-7">
               <p className="text-center">
-                Our squawk uses a variety of quantitative and qualitative
+                Squawk Market uses a variety of quantitative and qualitative
                 metrics as well as a suite of AI tools to provide you the most
                 relevant market news and data in extremely low ({"<"}1s)
-                latency. Don't miss a single momentum trade, market-moving news
+                latencies. Don't miss a single break-out momentum trade, market-moving news
                 event, high-impact economic release, breaking corporate
                 announcement, or geopolitical development. Stay ahead of the
                 game by capitalizing on volatility, intraday moves, and maximize
@@ -40,30 +50,23 @@ export function Home() {
           </div>
           <div className="row justify-content-center">
             <div className="col-12 col-md-4 border rounded p-3 m-3">
-              <div className="d-flex flex-column justify-content-between align-items-center h-100">
+              <div className="d-flex flex-column align-items-center h-100">
                 <h2 className="text-center">
-                  <u>Real Time Feed</u>
-                </h2>
-                <h2 className="text-center">
-                Macro & Micro S&P500 News
+                  <u>Market-Wide News</u>
                 </h2>
                 <p className="fw-bold">Free forever</p>
+                <p className="text-center">Provided as a courtesy to the trading community.</p>
+                <ActivateButton className="mb-3 btn btn-success" isComingSoon={false} isActivated={isActivated} setIsActivated={setIsActivated} />
                 <p>Includes:</p>
                 <ul>
                   <li>Trending / viral market news</li>
                   <li>Pre-market overview</li>
                   <li>Post-market overview</li>
-                  <li>Top movers in S&P500</li>
-                  <li>Unusual activity in S&P500</li>
-                  <li>Additions / removals to S&P500</li>
-                  <li>Occasional upgrade ads</li>
                 </ul>
-                <p className="text-center mt-auto">Provided as a courtesy to the trading community.</p>
-                <ActivateFreeFeedButton />
-              </div>
+                   </div>
             </div>
             <div className="col-12 col-md-4 border rounded p-3 m-3">
-              <PremiumPriceTile />
+              <PremiumPriceTile/>
             </div>
           </div>
         </div>
