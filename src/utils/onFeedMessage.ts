@@ -8,7 +8,7 @@ export const onFeedMessage = (
   item: ISquawk,
   dispatch: AppDispatch
 ) => {
-  console.log("onFeedMessage", item);
+  // console.log("onFeedMessage", item);
   dispatch(appendToItems(item));
   const audioPlayer = AudioPlayer.getInstance();
   audioPlayer.enqueue(item.mp3data, volume);
