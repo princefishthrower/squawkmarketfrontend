@@ -28,22 +28,7 @@ const Footer = () => {
                 <div className="my-3">
                   <a href="https://fullstackcraft.com">Full Stack Craft</a>
                 </div>
-                {/* <div className="my-3">
-                  <Link to="/about">About Us</Link>
-                </div>
-                <div className="my-3">
-                  <Link to="/sitemap">Sitemap</Link>
-                </div> */}
               </div>
-              {/* <div className="col-12 col-sm-6 col-md-2">
-                <div className="fw-bold my-4">Support</div>
-                <div className="my-3">
-                  <Link to="/contact">Contact</Link>
-                </div>
-                <div className="my-3">
-                  <Link to="/faqs">Subscription FAQs</Link>
-                </div>
-              </div> */}
               <div className="col-12 col-sm-6 col-md-2">
                 <div className="fw-bold my-4">Socials</div>
                 <div className="my-3">

@@ -19,14 +19,13 @@ const store = configureStore({
       }
     })
 })
+
 const persistor = persistStore(store)
 
-exports.wrapRootElement = ({ element }) => {
-  return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        {element}
-      </PersistGate>
-    </Provider>
-  )
-}
+export const wrapRootElement = ({ element }) => (
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      {element}
+    </PersistGate>
+  </Provider>
+)
