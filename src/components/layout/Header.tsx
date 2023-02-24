@@ -57,17 +57,7 @@ const Header = () => {
                   Subscribe
                 </Link>
               </li>
-              {/* <li className={'nav-item'}>
-                <Link to="/blog" className="fs-5 nav-link">
-                  Blog
-                </Link>
-              </li>
-              <li className={'nav-item'}>
-                <Link to="/contact" className="fs-5 nav-link">
-                  Contact
-                </Link>
-              </li> */}
-                <AuthWidget />
+              <AuthWidget />
             </ul>
           </div>
         </nav>

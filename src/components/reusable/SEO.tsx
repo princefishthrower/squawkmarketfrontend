@@ -19,6 +19,7 @@ export default function SEO(props: ISEOProps) {
 
   return (
     <>
+      <html lang="en" />
       <title>{formattedTitle}</title>
       <meta name="title" content={formattedTitle} />
       <meta name="description" content={description} />
