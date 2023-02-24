@@ -2,10 +2,8 @@ import { useEffect } from "react";
 import { onFeedMessage } from "../utils/onFeedMessage";
 import { HubConnectionState } from "@microsoft/signalr";
 import { AppDispatch } from "../redux/store";
-import { IConsumableQueue } from "../interfaces/IConsumableQueue";
 
 export const useConnectToFeedByName = (
-  queueRef: React.MutableRefObject<IConsumableQueue>,
   volume: number,
   connectionRef: React.MutableRefObject<signalR.HubConnection>,
   feedName: string,
@@ -24,7 +22,7 @@ export const useConnectToFeedByName = (
         connectionRef.current.connectionId
       );
       connectionRef.current.on(feedName, (item) =>
-        onFeedMessage(queueRef, volume, item, dispatch)
+        onFeedMessage(volume, item, dispatch)
       );
     }
     if (

@@ -8,17 +8,21 @@ import { useState } from "react";
 import { ActivateButton } from "../dashboard/components/ActivateButton";
 import { useAppSelector } from "../../../hooks/useAppSelector";
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
+import { useAds } from "../../../hooks/useAds";
 
 export function Home() {
   const { volume } = useAppSelector(state => state.feed);
   const dispatch = useAppDispatch();
   const [isActivated, setIsActivated] = useState(false);
 
-  // get a connection ref with ads
-  const {queueRef, connectionRef} = useFeedConnection(isActivated, true);
+  // get a connection ref
+  const {connectionRef} = useFeedConnection(isActivated);
+
+  // run ads
+  useAds();
 
   // connect to the free feed
-  useConnectToFeedByName(queueRef, volume, connectionRef, "market-wide", isActivated, dispatch)
+  useConnectToFeedByName(volume, connectionRef, "market-wide", isActivated, dispatch)
 
   return (
     <div className="container-fluid">
