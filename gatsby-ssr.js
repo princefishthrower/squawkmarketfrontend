@@ -28,7 +28,3 @@ exports.wrapRootElement = ({ element }) => {
     </Provider>
   )
 }
-
-exports.onRenderBody = ({ setHtmlAttributes }) => {
-  setHtmlAttributes({ lang: 'en' })
-}

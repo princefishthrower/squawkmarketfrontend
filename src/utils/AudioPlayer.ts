@@ -11,7 +11,6 @@ export class AudioPlayer {
     // this.isPlaying = false;
     this.audio.onended = () => {
       // wait for audio to finish playing, then wait 1 second and play next
-      console.log("DONE PLAYING AUDIO");
       setTimeout(() => {
         this.isPlaying = false;
         this.tryToPlayNext();
@@ -32,12 +31,6 @@ export class AudioPlayer {
   }
 
   private async tryToPlayNext(): Promise<void> {
-    console.log(
-      "PLAYING NEXT, QUEUE LENGTH: ",
-      this.audioQueue.length,
-      " IS PLAYING: ",
-      this.isPlaying
-    );
     if (this.audioQueue.length > 0 && !this.isPlaying) {
       this.isPlaying = true;
       const item = this.audioQueue.shift();
@@ -50,10 +43,9 @@ export class AudioPlayer {
       
       // try / catch in rare case of non-interaction with page
       try {
-        console.log("PLAYING AUDIO");
         this.audio.play();
-      } catch (e) {
-        console.log(e);
+      } catch (error) {
+        console.log(error);
       }
     }
 
