@@ -1,25 +1,16 @@
 import { useAppDispatch } from "./useAppDispatch";
-import {
-  createConsumableQueue,
-} from "../utils/createConsumableQueue";
 import { useEffect, useRef } from "react";
 import * as signalR from "@microsoft/signalr";
-import { useAppSelector } from "./useAppSelector";
 import {
   setIsConnected,
   setIsConnecting,
   setIsError,
   setVolume,
 } from "../redux/feedSlice";
-import useInterval from "./useInterval";
 import { getAccessToken } from "../utils/getAccessToken";
 
-export const useFeedConnection = (connect: boolean, withAds: boolean) => {
-  const { isConnected, volume } = useAppSelector(
-    (state) => state.feed
-  );
+export const useFeedConnection = (connect: boolean) => {
   const dispatch = useAppDispatch();
-  const queueRef = useRef(createConsumableQueue());
   const connectionRef = useRef(
     new signalR.HubConnectionBuilder()
       .withUrl(`${process.env.GATSBY_API_URL}/feeds`, {accessTokenFactory: () => getAccessToken()})
@@ -64,23 +55,6 @@ export const useFeedConnection = (connect: boolean, withAds: boolean) => {
     }
   }, [connect]);
 
-  // when withAds is true:
-  // while we are connected, useInterval to enqueue the advertisement mp3 every 10 minutes
-  useInterval(
-    () => {
-      // clear the queue
-      queueRef.current.removeAll();
-      // add the advertisement mp3
-      queueRef.current.add({
-        sourceType: "url",
-        source: "/advertisement.mp3",
-        volume,
-        squawk: "Advertisement",
-        link: null
-      });
-    },
-    withAds && isConnected ? 600000 : null
-  );
-
-  return {queueRef, connectionRef}
+  
+  return {connectionRef}
 };

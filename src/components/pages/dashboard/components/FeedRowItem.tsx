@@ -6,23 +6,21 @@ import { useConnectToFeedByName } from "../../../../hooks/useConnectToFeedByName
 import { HubConnection } from "@microsoft/signalr";
 import { useAppDispatch } from "../../../../hooks/useAppDispatch";
 import { useAppSelector } from "../../../../hooks/useAppSelector";
-import { IConsumableQueue } from "../../../../interfaces/IConsumableQueue";
 import { IFeedConfigItem } from "../../../../interfaces/IFeedConfigItem";
 
 export interface IFeedRowItemProps {
   feed: IFeedConfigItem;
-  queueRef: React.MutableRefObject<IConsumableQueue>;
   connectionRef: React.MutableRefObject<HubConnection>
 }
 
 export function FeedRowItem(props: IFeedRowItemProps) {
-  const { feed, queueRef, connectionRef } = props;
+  const { feed, connectionRef } = props;
   const { volume } = useAppSelector(state => state.feed)
   const dispatch = useAppDispatch();
   const [symbol, setSymbol] = useState<string>("");
   const [isActivated, setIsActivated] = useState<boolean>(false);
 
-  useConnectToFeedByName(queueRef, volume, connectionRef, feed.feedName, isActivated, dispatch)
+  useConnectToFeedByName(volume, connectionRef, feed.feedName, isActivated, dispatch)
 
   return (
     <>
