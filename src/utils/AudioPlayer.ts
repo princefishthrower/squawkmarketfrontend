@@ -67,12 +67,4 @@ export class AudioPlayer {
     this.audioQueue = [];
     this.isPlaying = false;
   }
-
-  private isPlayingFunc(): boolean {
-    return this.audio
-        && this.audio.currentTime > 0
-        && !this.audio.paused
-        && !this.audio.ended
-        && this.audio.readyState > 2;
-  }
 }
