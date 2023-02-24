@@ -10,7 +10,7 @@ export interface IFeedItemTileProps {
 export function FeedItemTile(props: IFeedItemTileProps) {
   const { item } = props;
   const { volume } = useAppSelector((state) => state.feed);
-  const { squawk, mp3data, created_at, link } = item;
+  const { squawk, mp3data, created_at, link, feed } = item;
 
   const onClickReplay = () => {
     playBase64StringWithVolume(mp3data, volume, () => {});
@@ -28,6 +28,9 @@ export function FeedItemTile(props: IFeedItemTileProps) {
       ).toLocaleDateString()} ${new Date(
         created_at
       ).toLocaleTimeString()} Local / ${estTime} EST`}</div>
+      <div>
+              <small className="badge rounded-pill bg-secondary font-monospace fw-lighter">feed: {feed}</small>
+            </div>
       <div className="my-3">{squawk}</div>
       {link && <a className="my-3" href={link} target="_blank" rel="noreferrer noopener">
         Link to article

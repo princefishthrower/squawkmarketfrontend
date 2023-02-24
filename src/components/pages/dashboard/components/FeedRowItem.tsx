@@ -22,13 +22,18 @@ export function FeedRowItem(props: IFeedRowItemProps) {
 
   useConnectToFeedByName(volume, connectionRef, feed.feedName, isActivated, dispatch)
 
+  const className = feed.feedName === "Custom" ? "col-12 my-4 user-select-none pe-none" : "col-12 my-4";
+
   return (
     <>
-      <div className="col-12 my-4">
+      <div className={className}>
         <div className="d-flex flex-row align-items-center">
           <div className="d-flex flex-column">
             <p className={feed.isComingSoon ? "m-0 fw-bold text-muted" : "m-0 fw-bold"}>{feed.title}</p>
-            <p className="m-0 text-muted">{feed.subtitle}</p>
+            <p className="my-3 text-muted">{feed.subtitle}</p>
+            <div>
+              <small className="badge rounded-pill bg-secondary font-monospace fw-lighter">feed: {feed.feedName}</small>
+            </div>
           </div>
           {feed.hasSymbolInput && (
             <>

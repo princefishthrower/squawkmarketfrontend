@@ -118,6 +118,14 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isComingSoon: false,
   },
   {
+    title: "Crypto News",
+    subtitle: "News from all around the crypto world. We're sorry its in the 'popular' feed section.",
+    feedName: "crypto",
+    isPopular: true,
+    hasSymbolInput: false,
+    isComingSoon: false,
+  },
+  {
     title: "Most Active",
     subtitle: "Stocks, ETFs, and instruments with the most trading volume.",
     feedName: "most-active",
