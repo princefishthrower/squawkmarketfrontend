@@ -7,7 +7,7 @@ export interface ISEOProps {
 
 export default function SEO(props: ISEOProps) {
   const { title, description } = props
-  const imageUrl = 'https://squawkmarket.com/og.png'
+  const imageUrl = 'https://squawk-market.com/og.png'
   const formattedTitle = `Squawk Market | ${title}`
   const resolveOgUrl = () => {
     if (typeof window !== 'undefined') {
