@@ -12,6 +12,7 @@ export interface IActivateButtonProps {
 export function ActivateButton(props: IActivateButtonProps) {
   const { className, isComingSoon, isActivated, setIsActivated } = props;
   const [isConnecting, setIsConnecting] = useState(false);
+  const [isMobileTapped, setIsMobileTapped] = useState(false);
 
   useEffect(() => {
     if (isActivated) {
@@ -47,12 +48,34 @@ export function ActivateButton(props: IActivateButtonProps) {
   const buttonText = resolveButtonText();
 
   return (
-    <button
-      disabled={isConnecting}
-      onClick={onClickButton}
-      className={className}
-    >
-      {buttonText}
-    </button>
+    <>
+      {/* desktop - a single button / tap is fine */}
+      <button
+        disabled={isConnecting}
+        onClick={onClickButton}
+        className={`${className} d-none d-md-block`}
+      >
+        {buttonText}
+      </button>
+      {/* on mobile we need two taps, first show a 'activate' button */}
+      {!isMobileTapped && (
+        <button
+          onClick={() => setIsMobileTapped(true)}
+          className={`${className} d-block d-md-none`}
+        >
+          Activate
+        </button>
+      )}
+      {/* on mobile we need two taps, second show a 'connect' button */}
+      {isMobileTapped && (
+        <button
+          disabled={isConnecting}
+          onClick={onClickButton}
+          className={`${className} d-block d-md-none`}
+        >
+          {buttonText}
+        </button>
+      )}
+    </>
   );
 }
