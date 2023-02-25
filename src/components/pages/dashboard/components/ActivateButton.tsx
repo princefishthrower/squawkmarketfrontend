@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 export interface IActivateButtonProps {
   className: string;
@@ -7,21 +7,29 @@ export interface IActivateButtonProps {
   setIsActivated: (isActivated: boolean) => void;
 }
 
-export function ActivateButton (props: IActivateButtonProps) {
+export function ActivateButton(props: IActivateButtonProps) {
   const { className, isComingSoon, isActivated, setIsActivated } = props;
 
   if (isComingSoon) {
     return (
-      <button className='ms-auto btn btn-success' disabled>
+      <button className="ms-auto btn btn-success" disabled>
         Coming Soon
       </button>
     );
   }
 
-  const buttonText = isActivated ? <>{'\u2588'} Disconnect</> : <>{"\u2B80"} Connect</>;
+  const buttonText = isActivated ? (
+    <>{"\u2588"} Disconnect</>
+  ) : (
+    <>{"\u2B80"} Connect</>
+  );
   return (
-    <button onClick={() => setIsActivated(!isActivated)} className={className}>
-       {buttonText}
+    <button
+      // onClick={() => setIsActivated(!isActivated)}
+      onClickCapture={() => setIsActivated(!isActivated)}
+      className={className}
+    >
+      {buttonText}
     </button>
   );
 }
