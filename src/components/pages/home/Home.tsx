@@ -16,7 +16,7 @@ export function Home() {
   const [isActivated, setIsActivated] = useState(false);
 
   // get a connection ref
-  const {connectionRef} = useFeedConnection(isActivated);
+  const {isConnecting, connectionRef} = useFeedConnection(isActivated);
 
   // run ads
   useAds();
@@ -60,7 +60,7 @@ export function Home() {
                 </h2>
                 <p className="fw-bold">Free forever</p>
                 <p className="text-center">Provided as a courtesy to the trading community.</p>
-                <ActivateButton className="mb-3 btn btn-success" isComingSoon={false} isActivated={isActivated} setIsActivated={setIsActivated} />
+                <ActivateButton className="mb-3 btn btn-success" isConnecting={isConnecting} isComingSoon={false} isActivated={isActivated} setIsActivated={setIsActivated} />
                 <p>Includes:</p>
                 <ul>
                   <li>Trending / viral market news</li>

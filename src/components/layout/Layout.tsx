@@ -9,7 +9,7 @@ const Layout = (props: PropsWithChildren<{}>) => {
       <Header />
       {children}
       <Footer />
-      <audio id="audio" playsInline/>
+      <audio id="audio" playsInline={true} muted={true}/>
     </>
   );
 };
