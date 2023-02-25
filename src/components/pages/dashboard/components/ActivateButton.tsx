@@ -1,5 +1,7 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
+import { useAppSelector } from "../../../../hooks/useAppSelector";
+import { playLatestItem } from "../../../../utils/playLatestItem";
 
 export interface IActivateButtonProps {
   className: string;
@@ -11,8 +13,12 @@ export interface IActivateButtonProps {
 
 export function ActivateButton(props: IActivateButtonProps) {
   const { className, isComingSoon, isActivated, setIsActivated } = props;
+  const { items } = useAppSelector((state) => state.feed);
   const [isConnecting, setIsConnecting] = useState(false);
-  const [isMobileTapped, setIsMobileTapped] = useState(false);
+  const [isFirstMobileButtonTapped, setIsFirstMobileButtonTapped] =
+    useState(false);
+  const [isSecondMobileButtonTapped, setIsSecondMobileButtonTapped] =
+    useState(false);
 
   useEffect(() => {
     if (isActivated) {
@@ -45,7 +51,19 @@ export function ActivateButton(props: IActivateButtonProps) {
     return <>▶ Connect</>;
   };
 
+  const resolveMobileButtonText = () => {
+    if (isConnecting) {
+      return <>Activating...</>;
+    }
+    if (isActivated && isSecondMobileButtonTapped) {
+      return <>■ Disconnect</>;
+    }
+    return <>▶ Connect</>;
+  }
+
   const buttonText = resolveButtonText();
+  const mobileButtonText = resolveMobileButtonText();
+    
 
   return (
     <>
@@ -58,22 +76,28 @@ export function ActivateButton(props: IActivateButtonProps) {
         {buttonText}
       </button>
       {/* on mobile we need two taps, first show a 'activate' button */}
-      {!isMobileTapped && (
+      {!isFirstMobileButtonTapped && (
         <button
-          onClick={() => setIsMobileTapped(true)}
+          onClick={() => {
+            setIsFirstMobileButtonTapped(true);
+            onClickButton();
+          }}
           className={`${className} d-block d-md-none`}
         >
           Activate
         </button>
       )}
-      {/* on mobile we need two taps, second show a 'connect' button */}
-      {isMobileTapped && (
+      {/* on mobile we need two taps, second show the standard 'connect' button */}
+      {isFirstMobileButtonTapped && (
         <button
           disabled={isConnecting}
-          onClick={onClickButton}
+          onClick={() => {
+            setIsSecondMobileButtonTapped(true);
+            playLatestItem(items);
+          }}
           className={`${className} d-block d-md-none`}
         >
-          {buttonText}
+          {mobileButtonText}
         </button>
       )}
     </>
