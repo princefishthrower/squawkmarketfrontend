@@ -17,6 +17,7 @@ export class AudioPlayer {
       }, 1000);
     };
     this.audio.muted = true;
+    (this.audio as any).playsinline = true;
   }
 
   public static getInstance(): AudioPlayer {
