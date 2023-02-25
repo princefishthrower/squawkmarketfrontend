@@ -16,6 +16,7 @@ export class AudioPlayer {
         this.tryToPlayNext();
       }, 1000);
     };
+    this.audio.muted = true;
   }
 
   public static getInstance(): AudioPlayer {
@@ -38,6 +39,11 @@ export class AudioPlayer {
         return;
       }
       const { audioBase64, volume } = item;
+      if (volume > 0) {
+        this.audio.muted = false;
+      } else {
+        this.audio.muted = true;
+      }
       this.audio.src = `data:audio/wav;base64,${audioBase64}`;
       this.audio.volume = volume * 0.1;
       
