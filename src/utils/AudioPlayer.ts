@@ -1,13 +1,15 @@
 // singleton class to play audio files in sequence
 export class AudioPlayer {
   private static instance: AudioPlayer;
-  private audio: HTMLAudioElement = new Audio();
+  private audio: HTMLAudioElement;
   private audioQueue: Array<{ audioBase64: string; volume: number }>;
   private isPlaying: boolean;
 
   private constructor() {
     this.audioQueue = [];
     this.isPlaying = false;
+    // get audio element (see Layout.tsx file)
+    this.audio = document.getElementById("audio") as HTMLAudioElement;
     // this.isPlaying = false;
     this.audio.onended = () => {
       // wait for audio to finish playing, then wait 1 second and play next
@@ -16,7 +18,6 @@ export class AudioPlayer {
         this.tryToPlayNext();
       }, 1000);
     };
-    this.audio.muted = true;
   }
 
   public static getInstance(): AudioPlayer {

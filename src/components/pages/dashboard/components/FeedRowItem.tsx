@@ -10,11 +10,12 @@ import { IFeedConfigItem } from "../../../../interfaces/IFeedConfigItem";
 
 export interface IFeedRowItemProps {
   feed: IFeedConfigItem;
+  isConnecting: boolean;
   connectionRef: React.MutableRefObject<HubConnection>
 }
 
 export function FeedRowItem(props: IFeedRowItemProps) {
-  const { feed, connectionRef } = props;
+  const { feed, isConnecting, connectionRef } = props;
   const { volume } = useAppSelector(state => state.feed)
   const dispatch = useAppDispatch();
   const [symbol, setSymbol] = useState<string>("");
@@ -138,7 +139,7 @@ export function FeedRowItem(props: IFeedRowItemProps) {
           {/* <FrequencyDropdown /> */}
           {/* TODO: minimum percent */}
           {/* <MinimumPercentDropdown /> */}
-          <ActivateButton className="ms-auto btn btn-success" isComingSoon={feed.isComingSoon} isActivated={isActivated} setIsActivated={setIsActivated} />
+          <ActivateButton className="ms-auto btn btn-success" isConnecting={isConnecting} isComingSoon={feed.isComingSoon} isActivated={isActivated} setIsActivated={setIsActivated} />
         </div>
       </div>
       <hr className="m-0" />
