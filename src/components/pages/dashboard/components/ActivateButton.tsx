@@ -19,14 +19,14 @@ export function ActivateButton(props: IActivateButtonProps) {
   }
 
   const buttonText = isActivated ? (
-    <>{"\u2588"} Disconnect</>
+    <>■ Disconnect</>
   ) : (
-    <>{"\u2B80"} Connect</>
+    <>▶ Connect</>
   );
+  
   return (
     <button
-      // onClick={() => setIsActivated(!isActivated)}
-      onClickCapture={() => setIsActivated(!isActivated)}
+      onClick={() => setIsActivated(!isActivated)}
       className={className}
     >
       {buttonText}

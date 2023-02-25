@@ -31,7 +31,7 @@ const Header = () => {
             type="button"
             aria-label="Toggle navigation"
           >
-            {"\u25BC"}
+            ▼
           </button>
           <div
             className={
