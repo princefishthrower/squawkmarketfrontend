@@ -23,6 +23,12 @@ const Footer = () => {
         <div className="col-12 col-lg-7 text-center text-start">
           <div className="container">
             <div className="row justify-content-center justify-content-lg-end">
+            <div className="col-12 col-sm-6 col-md-2">
+                <div className="fw-bold my-4">Products</div>
+                <div className="my-3">
+                  <a href="https://wheelscreener.com">The Wheel Screener</a>
+                </div>
+              </div>
               <div className="col-12 col-sm-6 col-md-2">
                 <div className="fw-bold my-4">Company</div>
                 <div className="my-3">
@@ -69,9 +75,11 @@ const Footer = () => {
         <div className="col-12 col-lg-6 col-md-6 text-center text-md-start">
           © {year} 👨‍💻&nbsp;&nbsp;with ❤️&nbsp;&nbsp;by <a href="https://fullstackcraft.com">Full Stack Craft</a>
         </div>
-        <div className="col-12 col-lg-6 col-md-6 text-center text-md-end">
-          {process.env.GATSBY_PRODUCT_NAME} v1.0.0-{process.env.GATSBY_BRANCH}-{process.env.GATSBY_COMMIT_REF?.slice(0, 7)}{' '}
-          {process.env.GATSBY_LAST_BUILD?.split('+')[0].replace('T', ' ')}
+        <div className="col-12 col-lg-6 col-md-6 text-center text-muted text-md-end">
+          <small>
+          v1.0.0{' '}
+          {process.env.GATSBY_BRANCH}-{process.env.GATSBY_COMMIT_REF?.slice(0, 7)}{' '}
+          Last updated {process.env.GATSBY_LAST_BUILD?.split('+')[0].replace('T', ' ')}</small>
         </div>
       </div>
     </div></>

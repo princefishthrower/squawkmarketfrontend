@@ -57,6 +57,11 @@ const Header = () => {
                   Subscribe
                 </Link>
               </li>
+              <li className={"nav-item"}>
+                <Link to="/contact" className="fs-5 nav-link">
+                  Contact
+                </Link>
+              </li>
               <AuthWidget />
             </ul>
           </div>

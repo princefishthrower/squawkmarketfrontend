@@ -1,4 +1,4 @@
-import { setIsLoggedIn } from "../redux/auth";
+import { setIsLoggedIn } from "../redux/authSlice";
 import { AppDispatch } from "../redux/store";
 import { supabase } from "../services/supabase";
 

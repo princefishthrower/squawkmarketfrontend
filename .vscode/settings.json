@@ -1,6 +1,8 @@
 {
     "cSpell.words": [
+        "APIKEY",
         "intraday",
+        "mailjet",
         "persistor",
         "Supabase"
     ]

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { supabase } from "../services/supabase";
 import { useAppDispatch } from "./useAppDispatch";
-import { setIsLoading, setIsLoggedIn, setIsPremium } from "../redux/auth";
+import { setIsLoading, setIsLoggedIn, setIsPremium } from "../redux/authSlice";
 import { useAppSelector } from "./useAppSelector";
 
 export const useSupabaseSession = () => {

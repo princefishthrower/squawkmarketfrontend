@@ -1,5 +1,5 @@
 [build]
-  command = "export GATSBY_COMMIT_REF=$COMMIT_REF && export GATSBY_BRANCH=$BRANCH && export GATSBY_LAST_BUILD=$(date --iso-8601=seconds) && npm install && npm run build"
+  command = "export GATSBY_COMMIT_REF=$COMMIT_REF && export GATSBY_BRANCH=$BRANCH && export GATSBY_LAST_BUILD=$(date --iso-8601=seconds) && cd functions && npm install && npm run build && cd .. && npm install && npm run build"
   publish = "public"
   functions = "functions/dist"
 
