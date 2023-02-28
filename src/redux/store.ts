@@ -1,6 +1,7 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import feedSlice, {feedInitialState} from './feedSlice';
-import authSlice, { authInitialState } from './auth';
+import authSlice, { authInitialState } from './authSlice';
+import formsSlice, { formsInitialState } from './formsSlice';
 
 import {
   FLUSH,
@@ -16,6 +17,7 @@ import storage from 'redux-persist/lib/storage';
 export const initialState = {
   feed: feedInitialState,
   auth: authInitialState,
+  forms: formsInitialState,
 };
 
 // persist only user slice
@@ -28,6 +30,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   feed: feedSlice,
   auth: authSlice,
+  forms: formsSlice,
 });
 
 // persistedReducer is used in gatsby-ssr and gatsby-browser

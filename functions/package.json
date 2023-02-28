@@ -1,0 +1,14 @@
+{
+    "name": "functions",
+    "version": "1.0.0",
+    "description": "Netlify serverless functions for squawk-market.com",
+    "repository": "Netlify serverless functions for squawk-market.com",
+    "scripts": {
+        "build": "tsc"
+    },
+    "keywords": [],
+    "dependencies": {
+        "@netlify/functions": "^1.4.0",
+        "node-mailjet": "^6.0.2"
+    }
+}
