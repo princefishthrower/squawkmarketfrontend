@@ -28,7 +28,15 @@ export class AudioPlayer {
   }
 
   public enqueue(audioBase64: string, volume: number): void {
+    // add to queue
     this.audioQueue.push({ audioBase64, volume });
+
+    // before trying to play, remove any duplicates we may have
+    this.audioQueue = this.audioQueue.filter(
+      (item, index, self) =>
+        index === self.findIndex((t) => t.audioBase64 === item.audioBase64)
+    );
+
     this.tryToPlayNext();
   }
 

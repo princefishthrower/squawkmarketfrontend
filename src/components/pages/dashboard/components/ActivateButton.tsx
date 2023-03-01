@@ -11,11 +11,19 @@ export interface IActivateButtonProps {
   isComingSoon: boolean;
   isConnecting: boolean;
   isActivated: boolean;
+  isError: boolean;
   setIsActivated: (isActivated: boolean) => void;
 }
 
 export function ActivateButton(props: IActivateButtonProps) {
-  const { feed, className, isComingSoon, isActivated, setIsActivated } = props;
+  const {
+    feed,
+    className,
+    isComingSoon,
+    isActivated,
+    isError,
+    setIsActivated,
+  } = props;
   const { items } = useAppSelector((state) => state.feed);
   const [isConnecting, setIsConnecting] = useState(false);
   const [isFirstMobileButtonTapped, setIsFirstMobileButtonTapped] =
@@ -29,40 +37,50 @@ export function ActivateButton(props: IActivateButtonProps) {
     }
   }, [isActivated]);
 
-  const onClickButton = () => {
+  const onClickConnect = () => {
     setIsConnecting(true);
     setTimeout(() => {
-      setIsActivated(!isActivated);
+      setIsActivated(true);
     }, 500);
 
     // track in mixpanel with feed name
     mixpanel.track(MixpanelConstants.USER_ACTIVATES_FEED, {
-      feed
+      feed,
     });
+  };
+
+  const onClickDisconnect = () => {
+    setIsConnecting(false);
+    setIsActivated(false);
   };
 
   const resolveButtonText = () => {
     if (isConnecting) {
-      return <>Connecting...</>;
+      return "Connecting...";
     }
     if (isActivated) {
-      return <>■ Disconnect</>;
+      return "■ Disconnect";
     }
-    return <>▶ Connect</>;
+    return "▶ Connect";
   };
 
   const resolveMobileButtonText = () => {
     if (isConnecting) {
-      return <>Activating...</>;
+      return "Activating...";
     }
     if (isActivated && isSecondMobileButtonTapped) {
-      return <>■ Disconnect</>;
+      return "■ Disconnect";
     }
-    return <>▶ Connect</>;
-  }
+    return "▶ Connect";
+  };
 
   const buttonText = resolveButtonText();
   const mobileButtonText = resolveMobileButtonText();
+
+  const onClick =
+    buttonText === "▶ Connect" || buttonText === "Connecting..."
+      ? onClickConnect
+      : onClickDisconnect;
 
   if (isComingSoon) {
     return (
@@ -71,13 +89,13 @@ export function ActivateButton(props: IActivateButtonProps) {
       </button>
     );
   }
-    
+
   return (
     <>
       {/* desktop - a single button / tap is fine */}
       <button
         disabled={isConnecting}
-        onClick={onClickButton}
+        onClick={onClick}
         className={`${className} d-none d-md-block`}
       >
         {buttonText}
@@ -87,7 +105,7 @@ export function ActivateButton(props: IActivateButtonProps) {
         <button
           onClick={() => {
             setIsFirstMobileButtonTapped(true);
-            onClickButton();
+            onClick();
           }}
           className={`${className} d-block d-md-none`}
         >
@@ -106,6 +124,11 @@ export function ActivateButton(props: IActivateButtonProps) {
         >
           {mobileButtonText}
         </button>
+      )}
+      {isError && (
+        <div className="text-danger mb-2">
+          Error connecting. Please try again.
+        </div>
       )}
     </>
   );

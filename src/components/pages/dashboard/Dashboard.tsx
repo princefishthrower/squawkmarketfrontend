@@ -13,7 +13,7 @@ export function Dashboard() {
   );
 
   useSupabaseSession();
-  const {connectionRef} = useFeedConnection(true);
+  const {connectionRef, isError} = useFeedConnection(true);
 
   if (isLoading) {
     return (
@@ -93,20 +93,20 @@ export function Dashboard() {
             .filter((feed) => feed.isPopular)
             .filter((feed) => !feed.isComingSoon)
             .map((feed) => (
-              <FeedRowItem isConnecting={false} connectionRef={connectionRef} key={feed.feedName} feed={feed} />
+              <FeedRowItem isConnecting={false} connectionRef={connectionRef} isError={isError} key={feed.feedName} feed={feed} />
             ))}
           <h2 className="mt-5">Other Feeds</h2>
           {feedConfig
             .filter((feed) => !feed.isPopular)
             .filter((feed) => !feed.isComingSoon)
             .map((feed) => (
-              <FeedRowItem isConnecting={false} connectionRef={connectionRef} key={feed.feedName} feed={feed} />
+              <FeedRowItem isConnecting={false} connectionRef={connectionRef} isError={isError} key={feed.feedName} feed={feed} />
             ))}
           <h2 className="mt-5">Coming Soon</h2>
           {feedConfig
             .filter((feed) => feed.isComingSoon)
             .map((feed) => (
-              <FeedRowItem isConnecting={false} connectionRef={connectionRef} key={feed.feedName} feed={feed} />
+              <FeedRowItem isConnecting={false} connectionRef={connectionRef} isError={isError} key={feed.feedName} feed={feed} />
             ))}
         </div>
       </div>
