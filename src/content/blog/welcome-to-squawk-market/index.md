@@ -7,21 +7,21 @@ date: '2023-03-01'
 
 ## What is "Squawk"?
 
-If you are a seasoned trader, you may be familiar this term already. However, if you're a beginner, you may have no idea what this is. "Squawk" is simply
+If you are a seasoned trader, you may be familiar this term already. However, if you're a beginner, you may have no idea what this is. "Squawk" is simply a term for a live market news feed, typically in the form of spoken word. It's an essential tool in any trader's toolkit.
 
 ## How to Use Squawk Market
 
-First, [sign up to access the dashboard](/subscribe), or [login](/login) to Squawk Market if you have an account. You'll get a link to the [dashboard](/dashboard) in your email. Once you're in, you'll see a large series of rows of all the feeds we offer, with title, and a bit more detailed subscription:
+First, [sign up to access the dashboard](/subscribe), or [login](/login) to Squawk Market if you have an account. You'll get a link to the [dashboard](/dashboard) in your email. Once you're in, you'll see the wide array of feeds that we offer, with title, description, and a 'connect' button:
 
 <img alt="Dashboard with no feeds activated" src="/images/activateFeeds.png" class="img-fluid border rounded p-1 m-3"/>
 
 
-You can click 'connect' on any one of them, and as soon as you see 'disconnect', you're connected to that feed! You'll see live squawks start to collect in the sidebar if on desktop, and below if on mobile:
+You can click 'connect' on any one of them, and as soon as you see 'disconnect', you're connected to that feed! You'll see live squawks start to collect in the sidebar (if on desktop), and below (if on mobile):
 
 <img alt="Dashboard with market wide feed activated" src="/images/feedsActivated.png" class="img-fluid border rounded p-1 m-3"/>
 
 
-You can click on any one of them at any time to replay the full squawk. We're working on incorporating the original link to the source of the squawk, so you can read the full article or source.
+You can click on any squawk again at any time to replay the full squawk. Soon we'll include the original link to the source of the squawk, so you can go directly the full article or source.
 
 ## What Feeds are Available?
 
@@ -51,7 +51,7 @@ At [Full Stack Craft](https://fullstackcraft.com), we like to keep things as lea
 
 All of these services are extremely affordable, and some even include a generous free tier all together. Combining them with our own low latency custom code, we're proud to be able to offer an extremely low-latency market squawk service for less half the price of our competitors.
 
-## What's Next?
+## Coming Soon
 
 We're working on a variety of new feeds and features:
 
@@ -71,9 +71,9 @@ Option flow and metrics like Gamma, Vanna, and Charm exposure are all the rage c
 
 - Latency Tester & Feed Builder
 
-Got a favorite news source, blog, or data website you always use? Soon, you will be able to provide a URL of your choice and a keyword, and we'll test the latency our service requires to report the summary of that keyword for you. You'll be able to transform that test into your very own feed.
+Got a favorite news source, blog, or data website you always use? Soon, you will be able to provide a URL of your choice and various keywords, and we'll test the latency our service requires to report the summary of that keyword for you. You'll be able to transform that test into your very own feed.
 
-Even with all these feeds and features planned, we've still got a massive variety of other feeds in mind, including:
+Even with all these feeds and features planned, we've still got a massive variety of other feeds in the pipeline, including:
 
 - Bond Auction Feeds
 
@@ -92,6 +92,8 @@ Even with all these feeds and features planned, we've still got a massive variet
 - Analyst Ratings / Price Target Feeds
 
 Reach out to us if any of these are of particular interest to you, and we'll prioritize them! (Otherwise we'll build them in the order we think they'll be most useful to the community - which isn't much more than a weak guess!)
+
+We're hoping that Squawk Market is the last market squawk service you'll ever need. We're committed to building a service that is not only affordable, but also extremely powerful and versatile. We're excited to see what the future holds for Squawk Market!
 
 ## What is the Service Like?
 
