@@ -6,6 +6,7 @@ import { Link } from "gatsby";
 import { useAppSelector } from "../../../hooks/useAppSelector";
 import { useFeedConnection } from "../../../hooks/useFeedConnection";
 import { feedConfig } from "../../../config/feedConfig";
+import { useEffect } from "react";
 
 export function Dashboard() {
   const { isLoading, isLoggedIn, isPremium } = useAppSelector(
@@ -13,7 +14,12 @@ export function Dashboard() {
   );
 
   useSupabaseSession();
-  const {connectionRef, isError} = useFeedConnection(true);
+  const {setIsActivated, connectionRef, isError} = useFeedConnection();
+
+  // on mount activate the connection
+  useEffect(() => {
+    setIsActivated(true);
+  }, []);
 
   if (isLoading) {
     return (

@@ -28,7 +28,7 @@ export function AuthWidget() {
         </a>
       </li>
       <div>
-      <button onClick={() => logout(dispatch)} className="btn btn-success">
+      <button onClick={() => logout(dispatch)} className="btn btn-danger">
         Logout
       </button>
       </div>
