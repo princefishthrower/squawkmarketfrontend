@@ -1,8 +1,14 @@
 import * as React from "react";
 import { MixpanelConstants } from "../../constants/MixpanelConstants";
 import mixpanel from "mixpanel-browser";
+import { useAppSelector } from "../../hooks/useAppSelector";
+import { Link } from "gatsby";
+import { useSupabaseSession } from "../../hooks/useSupabaseSession";
 
 export function PremiumPriceTile() {
+  const { isPremium } = useAppSelector((state) => state.auth);
+
+  useSupabaseSession();
   return (
     <div className="d-flex flex-column justify-content-center align-items-center">
       <h2 className="text-center">
@@ -12,13 +18,25 @@ export function PremiumPriceTile() {
       <p className="text-center">
         All feeds toggleable and streamed in real-time.
       </p>
-      <a
-        href={process.env.GATSBY_STRIPE_PAYMENT_URL}
-        className="mb-3 btn btn-success"
-        onClick={() => mixpanel.track(MixpanelConstants.USER_CLICKS_SUBSCRIBE)}
-      >
-        Subscribe
-      </a>
+      {isPremium && (
+        <>
+          <p className="text-center">You're already subscribed.</p>
+          <Link to="/dashboard" className="mb-3 btn btn-success">
+            Go To Dashboard
+          </Link>
+        </>
+      )}
+      {!isPremium && (
+        <a
+          href={process.env.GATSBY_STRIPE_PAYMENT_URL}
+          className="mb-3 btn btn-success"
+          onClick={() =>
+            mixpanel.track(MixpanelConstants.USER_CLICKS_SUBSCRIBE)
+          }
+        >
+          Subscribe
+        </a>
+      )}
       <p>Includes:</p>
       <ul>
         {/* <li>Economic prints (CPI, Fed, etc.)</li> */}
@@ -42,7 +60,6 @@ export function PremiumPriceTile() {
         <li>Many more coming soon...</li>
         {/* <li>Activate / deactivate feeds, frequencies, thresholds</li> */}
       </ul>
-      
     </div>
   );
 }
