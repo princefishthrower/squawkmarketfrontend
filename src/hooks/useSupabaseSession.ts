@@ -20,11 +20,14 @@ export const useSupabaseSession = () => {
     if (error) {
       console.error(error);
       dispatch(setIsLoading(false));
+      dispatch(setIsLoggedIn(false));
+      dispatch(setIsPremium(false));
       return;
     }
     if (data) {
-      dispatch(setIsPremium(data[0].is_subscribed));
       dispatch(setIsLoading(false));
+      dispatch(setIsLoggedIn(true));
+      dispatch(setIsPremium(data[0].is_subscribed));
     }
   };
 
@@ -71,11 +74,8 @@ export const useSupabaseSession = () => {
 
     // else try to get the existing session
     getSession();
-  }, []);
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      getPremiumStatus();
-    }
-  }, [isLoggedIn]);
+    // also try to get the premium status
+    getPremiumStatus();
+  }, []);
 };
