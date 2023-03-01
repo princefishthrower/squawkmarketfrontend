@@ -1,6 +1,8 @@
 import * as React from "react";
 import { useState } from "react";
 import { sendMagicLink } from "../../../utils/sendMagicLink";
+import mixpanel from "mixpanel-browser";
+import { MixpanelConstants } from "../../../constants/MixpanelConstants";
 
 export function Login() {
   const [email, setEmail] = useState("");
@@ -23,6 +25,7 @@ export function Login() {
     }
     setIsComplete(true);
     setIsSending(false);
+    mixpanel.track(MixpanelConstants.USER_SENDS_THEMSELVES_MAGIC_LINK)
   };
 
   const resolveButtonText = () => {

@@ -40,7 +40,7 @@ export function Dashboard() {
               Login
             </Link>
             <p className="my-3">
-              Or, start with a free 7 day trial to get access to the dashboard:
+              Or, start with a free 7 day trial to get full premium access to the dashboard:
             </p>
             <Link to="/subscribe" className="btn btn-success">
               Subscribe

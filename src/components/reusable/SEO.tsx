@@ -37,7 +37,7 @@ export default function SEO(props: ISEOProps) {
       <meta property="og:description" content={description} />
 
       {/* Twitter Meta Tags */}
-      <meta name="twitter:title" content={process.env.GATSBY_PRODUCT_NAME} />
+      <meta name="twitter:title" content="Squawk Market" />
       <meta name="twitter:card" content="The best real-time & market-wide audio feed." />
       <meta name="twitter:creator" content="Full Stack Craft LCC" />
       <meta name="twitter:description" content={description} />

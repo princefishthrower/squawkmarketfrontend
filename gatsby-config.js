@@ -1,3 +1,4 @@
+const path = require(`path`)
 
 const plugins = [
   `gatsby-plugin-sass`,
@@ -45,7 +46,17 @@ const plugins = [
         }
       }
     }
-  }
+  },
+  {
+    resolve: 'gatsby-source-filesystem',
+    options: {
+      name: 'content',
+      path: path.join(__dirname, `src`, `content`)
+    }
+  },
+  {
+    resolve: 'gatsby-transformer-remark'
+  },
 ]
 
 // don't index staging sites

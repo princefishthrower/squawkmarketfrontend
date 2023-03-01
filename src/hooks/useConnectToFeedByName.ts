@@ -6,7 +6,7 @@ import { AppDispatch } from "../redux/store";
 export const useConnectToFeedByName = (
   volume: number,
   connectionRef: React.MutableRefObject<signalR.HubConnection>,
-  feedName: string,
+  feed: string,
   connect: boolean,
   dispatch: AppDispatch
 ) => {
@@ -18,10 +18,10 @@ export const useConnectToFeedByName = (
     ) {
       connectionRef.current.invoke(
         "AddToGroup",
-        feedName,
+        feed,
         connectionRef.current.connectionId
       );
-      connectionRef.current.on(feedName, (item) =>
+      connectionRef.current.on(feed, (item) =>
         onFeedMessage(volume, item, dispatch)
       );
     }
@@ -31,10 +31,10 @@ export const useConnectToFeedByName = (
     ) {
       connectionRef.current.invoke(
         "RemoveFromGroup",
-        feedName,
+        feed,
         connectionRef.current.connectionId
       );
-      connectionRef.current.off(feedName);
+      connectionRef.current.off(feed);
     }
   }, [connectionRef.current.state, connect]);
 };

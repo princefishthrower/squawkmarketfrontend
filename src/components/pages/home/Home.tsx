@@ -21,8 +21,10 @@ export function Home() {
   // run ads
   useAds();
 
+  const feed = "market-wide";
+
   // connect to the free feed
-  useConnectToFeedByName(volume, connectionRef, "market-wide", isActivated, dispatch)
+  useConnectToFeedByName(volume, connectionRef, feed, isActivated, dispatch)
 
   return (
     <div className="container-fluid">
@@ -60,7 +62,7 @@ export function Home() {
                 </h2>
                 <p className="fw-bold">Free forever</p>
                 <p className="text-center">Provided as a courtesy to the trading community.</p>
-                <ActivateButton className="mb-3 btn btn-success" isConnecting={isConnecting} isComingSoon={false} isActivated={isActivated} setIsActivated={setIsActivated} />
+                <ActivateButton feed={feed} className="mb-3 btn btn-success" isConnecting={isConnecting} isComingSoon={false} isActivated={isActivated} setIsActivated={setIsActivated} />
                 <p>Includes:</p>
                 <ul>
                   <li>Trending / viral market news</li>

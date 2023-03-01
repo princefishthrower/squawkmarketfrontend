@@ -13,13 +13,11 @@ const Contact = () => {
     <div className="container my-5">
       <h1
         className="text-center"
-        // id needed for link routing
-        id="contact"
       >
         Contact
       </h1>
       <p className="text-center my-3">
-        Don't hesitate to contact us 24/7 with questions, concerns, or ideas to make {process.env.GATSBY_PRODUCT_NAME} better.
+        Don't hesitate to contact us 24/7 with questions, concerns, or ideas to make Squawk Market better.
       </p>
       <div className="row justify-content-center">
         <div className="col-12 col-md-7">

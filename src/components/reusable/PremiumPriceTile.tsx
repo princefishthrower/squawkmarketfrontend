@@ -1,4 +1,6 @@
 import * as React from "react";
+import { MixpanelConstants } from "../../constants/MixpanelConstants";
+import mixpanel from "mixpanel-browser";
 
 export function PremiumPriceTile() {
   return (
@@ -13,6 +15,7 @@ export function PremiumPriceTile() {
       <a
         href={process.env.GATSBY_STRIPE_PAYMENT_URL}
         className="mb-3 btn btn-success"
+        onClick={() => mixpanel.track(MixpanelConstants.USER_CLICKS_SUBSCRIBE)}
       >
         Subscribe
       </a>
