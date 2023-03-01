@@ -2,12 +2,10 @@ import { useEffect } from "react";
 import { supabase } from "../services/supabase";
 import { useAppDispatch } from "./useAppDispatch";
 import { setIsLoading, setIsLoggedIn, setIsPremium } from "../redux/authSlice";
-import { useAppSelector } from "./useAppSelector";
 import mixpanel from "mixpanel-browser";
 import { MixpanelConstants } from "../constants/MixpanelConstants";
 
 export const useSupabaseSession = () => {
-  const { isLoggedIn } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
   const getPremiumStatus = async () => {
@@ -68,6 +66,7 @@ export const useSupabaseSession = () => {
     }
   };
 
+  // on mount, try to get login, session, and premium status
   useEffect(() => {
     // if there is a token in the url, try to get the session
     getLoginFromUrl();
