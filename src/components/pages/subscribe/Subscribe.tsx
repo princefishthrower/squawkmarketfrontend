@@ -1,7 +1,8 @@
-import * as React from 'react';
-import { PremiumPriceTile } from '../../reusable/PremiumPriceTile';
+import * as React from "react";
+import { PremiumPriceTile } from "../../reusable/PremiumPriceTile";
+import { FAQs } from "../../reusable/FAQs";
 
-export function Subscribe () {
+export function Subscribe() {
   return (
     <div className="my-5">
       <h1 className="text-center">Subscribe</h1>
@@ -9,10 +10,11 @@ export function Subscribe () {
         Subscribe to the best real-time & market-wide audio feed.
       </p>
       <div className="row justify-content-center">
-      <div className="col-12 col-md-4 border rounded p-3 m-3">
-      <PremiumPriceTile/>
+        <div className="col-12 col-md-4 border rounded p-3 m-3">
+          <PremiumPriceTile />
+        </div>
       </div>
-      </div>
+      <FAQs isMainPage={false}/>
     </div>
   );
 }

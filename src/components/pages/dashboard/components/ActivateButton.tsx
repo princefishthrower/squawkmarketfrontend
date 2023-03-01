@@ -2,8 +2,11 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../../../../hooks/useAppSelector";
 import { playLatestItem } from "../../../../utils/playLatestItem";
+import { MixpanelConstants } from "../../../../constants/MixpanelConstants";
+import mixpanel from "mixpanel-browser";
 
 export interface IActivateButtonProps {
+  feed: string;
   className: string;
   isComingSoon: boolean;
   isConnecting: boolean;
@@ -12,7 +15,7 @@ export interface IActivateButtonProps {
 }
 
 export function ActivateButton(props: IActivateButtonProps) {
-  const { className, isComingSoon, isActivated, setIsActivated } = props;
+  const { feed, className, isComingSoon, isActivated, setIsActivated } = props;
   const { items } = useAppSelector((state) => state.feed);
   const [isConnecting, setIsConnecting] = useState(false);
   const [isFirstMobileButtonTapped, setIsFirstMobileButtonTapped] =
@@ -26,19 +29,16 @@ export function ActivateButton(props: IActivateButtonProps) {
     }
   }, [isActivated]);
 
-  if (isComingSoon) {
-    return (
-      <button className="ms-auto btn btn-success" disabled>
-        Coming Soon
-      </button>
-    );
-  }
-
   const onClickButton = () => {
     setIsConnecting(true);
     setTimeout(() => {
       setIsActivated(!isActivated);
     }, 500);
+
+    // track in mixpanel with feed name
+    mixpanel.track(MixpanelConstants.USER_ACTIVATES_FEED, {
+      feed
+    });
   };
 
   const resolveButtonText = () => {
@@ -63,8 +63,15 @@ export function ActivateButton(props: IActivateButtonProps) {
 
   const buttonText = resolveButtonText();
   const mobileButtonText = resolveMobileButtonText();
-    
 
+  if (isComingSoon) {
+    return (
+      <button className="ms-auto btn btn-success" disabled>
+        Coming Soon
+      </button>
+    );
+  }
+    
   return (
     <>
       {/* desktop - a single button / tap is fine */}
