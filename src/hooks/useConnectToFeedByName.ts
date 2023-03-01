@@ -23,9 +23,10 @@ export const useConnectToFeedByName = (
         feed,
         connectionRef.current.connectionId
       );
-      connectionRef.current.on(feed, (item) =>
-        onFeedMessage(volume, item, items, dispatch)
-      );
+      connectionRef.current.on(feed, (item) => {
+        console.log("calling on feed message", item);
+        onFeedMessage(volume, item, items, dispatch);
+      });
     }
     if (
       connectionRef.current.state === HubConnectionState.Connected &&
