@@ -1,0 +1,29 @@
+// need to write custom styles since blog markup is generated from markdown
+// nice easy on the eyes reading experience
+// KEEP IT SIMPLE!
+.blog {
+    & h2 {
+      font-size: $h2-font-size;
+      margin-top: 3rem;
+      margin-bottom: -0.5rem;
+    }
+    & p {
+      font-size: $h4-font-size;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      line-height: 1.9rem;
+    }
+    & li {
+      list-style: square inside;
+      font-size: $h4-font-size;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      line-height: 2.2rem;
+      margin-left: 1rem;
+    }
+    & li p {
+      display: inline;
+      margin: 0;
+    }
+  }
+  

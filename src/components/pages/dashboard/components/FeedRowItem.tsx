@@ -139,7 +139,7 @@ export function FeedRowItem(props: IFeedRowItemProps) {
           {/* <FrequencyDropdown /> */}
           {/* TODO: minimum percent */}
           {/* <MinimumPercentDropdown /> */}
-          <ActivateButton className="ms-auto btn btn-success" isConnecting={isConnecting} isComingSoon={feed.isComingSoon} isActivated={isActivated} setIsActivated={setIsActivated} />
+          <ActivateButton feed={feed.feedName} className="ms-auto btn btn-success" isConnecting={isConnecting} isComingSoon={feed.isComingSoon} isActivated={isActivated} setIsActivated={setIsActivated} />
         </div>
       </div>
       <hr className="m-0" />

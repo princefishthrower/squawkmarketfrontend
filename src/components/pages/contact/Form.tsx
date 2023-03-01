@@ -2,6 +2,8 @@ import * as React from "react";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { Constants } from "../../../constants/Constants";
+import mixpanel from "mixpanel-browser";
+import { MixpanelConstants } from "../../../constants/MixpanelConstants";
 
 export interface IFormData {
   name: string;
@@ -28,6 +30,7 @@ export function Form(props: IFormProps) {
 
   const onSubmit = (data: FieldValues) => {
     onSubmitForm(data);
+    mixpanel.track(MixpanelConstants.USER_SENDS_CONTACT_EMAIL)
   };
 
   const messageLengthClass =

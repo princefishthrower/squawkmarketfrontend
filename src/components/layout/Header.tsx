@@ -18,9 +18,6 @@ const Header = () => {
             <div className="d-flex flex-row align-items-center justify-content-center">
               <Logo size={56} />
               <span className="ms-3 fw-bold font-monospace">Squawk Market</span>
-              <h1 className="fs-2 m-0 p-0 ms-2">
-                {process.env.GATSBY_PRODUCT_NAME}
-              </h1>
             </div>
           </Link>
           <button
@@ -45,6 +42,11 @@ const Header = () => {
               <li className={"nav-item"}>
                 <Link to="/dashboard" className="fs-5 nav-link">
                   Dashboard
+                </Link>
+              </li>
+              <li className={"nav-item"}>
+                <Link to="/blog" className="fs-5 nav-link">
+                  Blog
                 </Link>
               </li>
               <li className={"nav-item"}>

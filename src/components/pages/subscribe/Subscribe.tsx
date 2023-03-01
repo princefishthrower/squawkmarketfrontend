@@ -1,5 +1,6 @@
 import * as React from "react";
 import { PremiumPriceTile } from "../../reusable/PremiumPriceTile";
+import { FAQs } from "../../reusable/FAQs";
 
 export function Subscribe() {
   return (
@@ -13,6 +14,7 @@ export function Subscribe() {
           <PremiumPriceTile />
         </div>
       </div>
+      <FAQs isMainPage={false}/>
     </div>
   );
 }

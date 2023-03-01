@@ -3,6 +3,8 @@ import { supabase } from "../services/supabase";
 import { useAppDispatch } from "./useAppDispatch";
 import { setIsLoading, setIsLoggedIn, setIsPremium } from "../redux/authSlice";
 import { useAppSelector } from "./useAppSelector";
+import mixpanel from "mixpanel-browser";
+import { MixpanelConstants } from "../constants/MixpanelConstants";
 
 export const useSupabaseSession = () => {
   const { isLoggedIn } = useAppSelector((state) => state.auth);
@@ -47,7 +49,9 @@ export const useSupabaseSession = () => {
         return;
       }
       dispatch(setIsLoggedIn(true));
+      mixpanel.track(MixpanelConstants.USER_IS_LOGGED_IN_VIA_MAGIC_LINK);
     }
+    dispatch(setIsLoading(false));
   };
 
   const getSession = async () => {

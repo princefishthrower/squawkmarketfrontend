@@ -1,7 +1,7 @@
 import * as React from "react";
 import Layout from "../components/layout/Layout";
 import SEO from "../components/reusable/SEO";
-import Contact from "../components/pages/contacts/Contact";
+import Contact from "../components/pages/contact/Contact";
 
 export const Head = () => (
   <SEO
