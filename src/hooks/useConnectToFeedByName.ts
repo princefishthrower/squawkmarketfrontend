@@ -23,6 +23,7 @@ export const useConnectToFeedByName = (
         feed,
         connectionRef.current.connectionId
       );
+      console.log('setting "on" message handler for connection');
       connectionRef.current.on(feed, (item) => {
         console.log("calling on feed message", item);
         onFeedMessage(volume, item, items, dispatch);
@@ -39,5 +40,5 @@ export const useConnectToFeedByName = (
       );
       connectionRef.current.off(feed);
     }
-  }, [connectionRef.current.state, connect, items]);
+  }, [connectionRef.current.state, connect, volume]);
 };
