@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { onFeedMessage } from "../utils/onFeedMessage";
 import { HubConnectionState } from "@microsoft/signalr";
 import { AppDispatch } from "../redux/store";
+import { useAppSelector } from "./useAppSelector";
 
 export const useConnectToFeedByName = (
   volume: number,
@@ -10,6 +11,7 @@ export const useConnectToFeedByName = (
   connect: boolean,
   dispatch: AppDispatch
 ) => {
+  const { items } = useAppSelector((state) => state.feed);
   useEffect(() => {
     // ensure that connection is in 'Connected' state
     if (
@@ -22,7 +24,7 @@ export const useConnectToFeedByName = (
         connectionRef.current.connectionId
       );
       connectionRef.current.on(feed, (item) =>
-        onFeedMessage(volume, item, dispatch)
+        onFeedMessage(volume, item, items, dispatch)
       );
     }
     if (
@@ -36,5 +38,5 @@ export const useConnectToFeedByName = (
       );
       connectionRef.current.off(feed);
     }
-  }, [connectionRef.current.state, connect]);
+  }, [connectionRef.current.state, connect, items]);
 };
