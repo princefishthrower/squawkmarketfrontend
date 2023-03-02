@@ -10,13 +10,31 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isComingSoon: false,
   },
   {
-    title: "Economic Prints",
+    title: "U.S. Economic Prints",
     subtitle:
-      "Federal reserve press conferences, economic reports, inventories, etc.",
-    feedName: "economic-prints",
+      "U.S. CPI, PMI, jobless claims, inventories, etc.",
+    feedName: "us-economic-prints",
     isPopular: true,
     hasSymbolInput: false,
-    isComingSoon: true,
+    isComingSoon: false,
+  },
+  {
+    title: "Eurozone Economic Prints",
+    subtitle:
+      "Eurozone CPI, PMI, jobless claims, inventories, etc.",
+    feedName: "eu-economic-prints",
+    isPopular: true,
+    hasSymbolInput: false,
+    isComingSoon: false,
+  },
+  {
+    title: "Chinese Economic Prints",
+    subtitle:
+      "China's CPI, PMI, jobless claims, inventories, etc.",
+    feedName: "cny-economic-prints",
+    isPopular: false,
+    hasSymbolInput: false,
+    isComingSoon: false,
   },
   {
     title: "Option Flows",
