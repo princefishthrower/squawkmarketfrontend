@@ -4,13 +4,18 @@ import { useAppDispatch } from "./useAppDispatch";
 import { setIsLoading, setIsLoggedIn, setIsPremium } from "../redux/authSlice";
 import mixpanel from "mixpanel-browser";
 import { MixpanelConstants } from "../constants/MixpanelConstants";
+import { useAppSelector } from "./useAppSelector";
 
 export const useSupabaseSession = () => {
+  const { isLoggedIn } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
   const getPremiumStatus = async () => {
     const { data: user } = await supabase.auth.getUser();
     const userId = user.user?.id;
+    if (!userId) {
+      return
+    }
     const { data, error } = await supabase
       .from("profile")
       .select("*")
@@ -74,7 +79,14 @@ export const useSupabaseSession = () => {
     // else try to get the existing session
     getSession();
 
-    // also try to get the premium status
-    getPremiumStatus();
+    
   }, []);
+
+  // if the user is logged in, try to get the premium status
+  useEffect(() => {
+    if (isLoggedIn) {
+      // also try to get the premium status
+    getPremiumStatus();
+    }
+  }, [isLoggedIn]);
 };
