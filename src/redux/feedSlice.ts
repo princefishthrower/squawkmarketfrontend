@@ -7,7 +7,6 @@ type FeedState = {
   isConnecting: boolean;
   isError: boolean;
   items: Array<ISquawk>;
-  volume: number;
 };
 
 export const feedInitialState: FeedState = {
@@ -15,7 +14,6 @@ export const feedInitialState: FeedState = {
   isConnecting: false,
   isError: false,
   items: [],
-  volume: 5,
 };
 
 export const feedSlice = createSlice({
@@ -37,9 +35,6 @@ export const feedSlice = createSlice({
           new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
       );
     },
-    setVolume: (state, action: PayloadAction<number>) => {
-      state.volume = action.payload;
-    },
     setIsConnecting: (state, action: PayloadAction<boolean>) => {
       state.isConnecting = action.payload;
     },
@@ -55,7 +50,6 @@ export const feedSlice = createSlice({
 export const {
   setItems,
   appendToItems,
-  setVolume,
   setIsConnecting,
   setIsConnected,
   setIsError,

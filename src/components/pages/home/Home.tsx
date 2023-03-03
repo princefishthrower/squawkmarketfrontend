@@ -2,20 +2,19 @@ import * as React from "react";
 import { Logo } from "../../reusable/Logo";
 import { PremiumPriceTile } from "../../reusable/PremiumPriceTile";
 import { Sidebar } from "./Sidebar";
-import { useFeedConnection } from "../../../hooks/useFeedConnection";
+import { useHub } from "../../../hooks/useFeedConnection";
 import { useConnectToFeedByName } from "../../../hooks/useConnectToFeedByName";
 import { ActivateButton } from "../dashboard/components/ActivateButton";
-import { useAppSelector } from "../../../hooks/useAppSelector";
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
 import { useAds } from "../../../hooks/useAds";
+import { useState } from "react";
 
 export function Home() {
-  const { volume } = useAppSelector((state) => state.feed);
   const dispatch = useAppDispatch();
-  
-  // use feed connection (annoyingly complex hook)
-  const { isActivated, setIsActivated, isConnecting, connectionRef, isError } =
-    useFeedConnection();
+  const [shouldStartConnection, setShouldStartConnection] = useState(false);
+
+  // use hub
+  const { isHubStartError } = useHub();
 
   // run ads
   useAds();
@@ -23,13 +22,13 @@ export function Home() {
   const feed = "market-wide";
 
   // connect to the free feed
-  useConnectToFeedByName(volume, connectionRef, feed, isActivated, dispatch);
+  useConnectToFeedByName(feed, shouldStartConnection, dispatch);
 
   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col-12 col-xl-3 p-0 order-2 order-xl-1">
-          <Sidebar />
+          <Sidebar isHubStartError={isHubStartError} />
         </div>
         <div className="col-12 col-xl-9 order-1 order-xl-2">
           <div className="text-center">
@@ -65,12 +64,11 @@ export function Home() {
                 </p>
                 <ActivateButton
                   feed={feed}
-                  className="mb-3 btn btn-success"
-                  isConnecting={isConnecting}
+                  className="mb-3"
                   isComingSoon={false}
-                  isActivated={isActivated}
-                  isError={isError}
-                  setIsActivated={setIsActivated}
+                  shouldStartConnection={shouldStartConnection}
+                  setShouldStartConnection={setShouldStartConnection}
+                  isHubStartError={isHubStartError}
                 />
                 <p>Includes:</p>
                 <ul>

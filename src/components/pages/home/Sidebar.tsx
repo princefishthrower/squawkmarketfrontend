@@ -3,7 +3,12 @@ import { useAppSelector } from "../../../hooks/useAppSelector";
 import { FeedItemTile } from "../../reusable/FeedItemTile";
 import { FeedControls } from "../../reusable/FeedControls";
 
-export function Sidebar() {
+export interface ISidebarProps {
+  isHubStartError: boolean;
+}
+
+export function Sidebar(props: ISidebarProps) {
+  const { isHubStartError } = props;
   const { isConnected, items } = useAppSelector((state) => state.feed);
 
   const resolveContent = () => {
@@ -33,11 +38,19 @@ export function Sidebar() {
   };
 
   return (
-    <div
-      className="sidebar-height d-flex flex-column flex-shrink-0 bg-dark text-light overflow-auto"
-    >
+    <div className="sidebar-height d-flex flex-column flex-shrink-0 bg-dark text-light overflow-auto">
       <div className="my-3 font-monospace text-center">Live Feed Items</div>
-      <FeedControls/>
+      <FeedControls />
+      {isHubStartError && (
+        <div className="p-3 mx-3 rounded bg-danger text-light">
+          Error connecting to the server or connection lost. Please refresh the page.
+        </div>
+      )}
+      {/* {isFeedConnectionError && (
+        <div className="p-3 mx-3 rounded bg-danger text-light">
+          Error connecting to the feed. Try to connect again.
+        </div>
+      )} */}
       <div className="m-3">{resolveContent()}</div>
     </div>
   );

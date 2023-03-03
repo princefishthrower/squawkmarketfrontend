@@ -1,11 +1,12 @@
 import * as React from "react";
 import { useAppSelector } from "../../hooks/useAppSelector";
-import { useAppDispatch } from "../../hooks/useAppDispatch";
-import { setVolume } from "../../redux/feedSlice";
+import { getLocalStorageVolume } from "../../utils/localStorage/getLocalStorageVolume";
+import { useState } from "react";
+import { setLocalStorageVolume } from "../../utils/localStorage/setLocalStorageVolume";
 
 export function FeedControls() {
-  const { isConnected, volume } = useAppSelector((state) => state.feed);
-  const dispatch = useAppDispatch();
+  const { isConnected } = useAppSelector((state) => state.feed);
+  const [volume, setVolume] = useState(getLocalStorageVolume());
   const muteButtonText = volume === 0 ? "Unmute" : "Mute";
   const muteButtonVolumeValue = volume === 0 ? 5 : 0;
 
@@ -22,12 +23,18 @@ export function FeedControls() {
         max={10}
         value={volume}
         step={1}
-        onChange={(e) => dispatch(setVolume(parseInt(e.target.value)))}
+        onChange={(e) => {
+          setVolume(parseInt(e.target.value));
+          setLocalStorageVolume(parseInt(e.target.value));
+        }}
       />
       <button
         disabled={!isConnected}
         className="btn btn-secondary"
-        onClick={() => dispatch(setVolume(muteButtonVolumeValue))}
+        onClick={() => {
+          setVolume(muteButtonVolumeValue);
+          setLocalStorageVolume(muteButtonVolumeValue);
+        }}
       >
         {muteButtonText}
       </button>
