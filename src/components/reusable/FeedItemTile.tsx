@@ -1,7 +1,6 @@
 import * as React from "react";
 import { ISquawk } from "../../interfaces/IFeedItem";
-import { useAppSelector } from "../../hooks/useAppSelector";
-import { AudioPlayer } from "../../utils/AudioPlayer";
+import { AudioPlayer } from "../../services/AudioPlayer";
 
 export interface IFeedItemTileProps {
   item: ISquawk;
@@ -9,14 +8,13 @@ export interface IFeedItemTileProps {
 
 export function FeedItemTile(props: IFeedItemTileProps) {
   const { item } = props;
-  const { volume } = useAppSelector((state) => state.feed);
   const { squawk, mp3data, created_at, link, feed } = item;
 
   // on a manual replay, clear the queue and add the current item
   const onClickReplay = () => {
     const audioPlayer = AudioPlayer.getInstance()
     audioPlayer.clearAll();
-    audioPlayer.enqueue(mp3data, volume);
+    audioPlayer.enqueue(mp3data);
   }
 
   // get EST time from created_at

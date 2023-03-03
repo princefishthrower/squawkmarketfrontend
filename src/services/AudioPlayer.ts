@@ -1,8 +1,10 @@
+import { getLocalStorageVolume } from "../utils/localStorage/getLocalStorageVolume";
+
 // singleton class to play audio files in sequence
 export class AudioPlayer {
   private static instance: AudioPlayer;
   private audio: HTMLAudioElement;
-  private audioQueue: Array<{ audioBase64: string; volume: number }>;
+  private audioQueue: Array<string>;
   private isPlaying: boolean;
 
   private constructor() {
@@ -27,14 +29,14 @@ export class AudioPlayer {
     return AudioPlayer.instance;
   }
 
-  public enqueue(audioBase64: string, volume: number): void {
+  public enqueue(audioBase64: string): void {
     // add to queue
-    this.audioQueue.push({ audioBase64, volume });
+    this.audioQueue.push(audioBase64);
 
     // before trying to play, remove any duplicates we may have
     this.audioQueue = this.audioQueue.filter(
       (item, index, self) =>
-        index === self.findIndex((t) => t.audioBase64 === item.audioBase64)
+        index === self.findIndex((t) => t === item)
     );
 
     this.tryToPlayNext();
@@ -47,13 +49,13 @@ export class AudioPlayer {
       if (!item) {
         return;
       }
-      const { audioBase64, volume } = item;
+      const volume = getLocalStorageVolume();
       if (volume > 0) {
         this.audio.muted = false;
       } else {
         this.audio.muted = true;
       }
-      this.audio.src = `data:audio/wav;base64,${audioBase64}`;
+      this.audio.src = `data:audio/wav;base64,${item}`;
       this.audio.volume = volume * 0.1;
       
       // try / catch in rare case of non-interaction with page

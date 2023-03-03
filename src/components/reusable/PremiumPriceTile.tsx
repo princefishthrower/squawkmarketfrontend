@@ -20,7 +20,7 @@ export function PremiumPriceTile() {
       </p>
       {isPremium && (
         <>
-          <p className="text-center">You're already subscribed.</p>
+          <p className="text-center">You're already logged in!</p>
           <Link to="/dashboard" className="mb-3 btn btn-success">
             Go To Dashboard
           </Link>

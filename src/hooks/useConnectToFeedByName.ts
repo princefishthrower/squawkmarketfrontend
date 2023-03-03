@@ -3,42 +3,47 @@ import { onFeedMessage } from "../utils/onFeedMessage";
 import { HubConnectionState } from "@microsoft/signalr";
 import { AppDispatch } from "../redux/store";
 import { useAppSelector } from "./useAppSelector";
+import Hub from "../services/Hub";
 
 export const useConnectToFeedByName = (
-  volume: number,
-  connectionRef: React.MutableRefObject<signalR.HubConnection>,
   feed: string,
-  connect: boolean,
+  shouldStartConnection: boolean,
   dispatch: AppDispatch
 ) => {
   const { items } = useAppSelector((state) => state.feed);
   useEffect(() => {
-    // ensure that connection is in 'Connected' state
+    // ensure that hub is in 'Connected' state
+    const hub = Hub.getExistingInstance();
+    if (!hub) {
+      return;
+    }
     if (
-      connectionRef.current.state === HubConnectionState.Connected &&
-      connect
+      hub.hubConnection.state === HubConnectionState.Connected &&
+      shouldStartConnection
     ) {
-      connectionRef.current.invoke(
+      hub.hubConnection.invoke(
         "AddToGroup",
         feed,
-        connectionRef.current.connectionId
+        hub.hubConnection.connectionId
       );
       console.log('setting "on" message handler for connection');
-      connectionRef.current.on(feed, (item) => {
+      hub.hubConnection.on(feed, (item) => {
         console.log("calling on feed message", item);
-        onFeedMessage(volume, item, items, dispatch);
+        onFeedMessage(item, items, dispatch);
       });
+      console.log("successfully connected to feed", feed)
     }
     if (
-      connectionRef.current.state === HubConnectionState.Connected &&
-      !connect
+      hub.hubConnection.state === HubConnectionState.Connected &&
+      !shouldStartConnection
     ) {
-      connectionRef.current.invoke(
+      hub.hubConnection.invoke(
         "RemoveFromGroup",
         feed,
-        connectionRef.current.connectionId
+        hub.hubConnection.connectionId
       );
-      connectionRef.current.off(feed);
+      hub.hubConnection.off(feed);
+      console.log("successfully disconnected from feed", feed)
     }
-  }, [connectionRef.current.state, connect, volume]);
+  }, [shouldStartConnection]);
 };
