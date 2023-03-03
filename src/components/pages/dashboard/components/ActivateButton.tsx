@@ -9,10 +9,9 @@ export interface IActivateButtonProps {
   feed: string;
   className: string;
   isComingSoon: boolean;
-  isConnecting: boolean;
-  isActivated: boolean;
-  isError: boolean;
-  setIsActivated: (isActivated: boolean) => void;
+  shouldStartConnection: boolean;
+  setShouldStartConnection: (shouldStartConnection: boolean) => void;
+  isHubStartError: boolean;
 }
 
 export function ActivateButton(props: IActivateButtonProps) {
@@ -20,9 +19,9 @@ export function ActivateButton(props: IActivateButtonProps) {
     feed,
     className,
     isComingSoon,
-    isActivated,
-    isError,
-    setIsActivated,
+    shouldStartConnection,
+    setShouldStartConnection,
+    isHubStartError
   } = props;
   const { items } = useAppSelector((state) => state.feed);
   const [isConnecting, setIsConnecting] = useState(false);
@@ -32,15 +31,15 @@ export function ActivateButton(props: IActivateButtonProps) {
     useState(false);
 
   useEffect(() => {
-    if (isActivated) {
+    if (shouldStartConnection) {
       setIsConnecting(false);
     }
-  }, [isActivated]);
+  }, [shouldStartConnection]);
 
   const onClickConnect = () => {
     setIsConnecting(true);
     setTimeout(() => {
-      setIsActivated(true);
+      setShouldStartConnection(true);
     }, 500);
 
     // track in mixpanel with feed name
@@ -51,14 +50,14 @@ export function ActivateButton(props: IActivateButtonProps) {
 
   const onClickDisconnect = () => {
     setIsConnecting(false);
-    setIsActivated(false);
+    setShouldStartConnection(false);
   };
 
   const resolveButtonText = () => {
     if (isConnecting) {
       return "Connecting...";
     }
-    if (isActivated) {
+    if (shouldStartConnection) {
       return "■ Disconnect";
     }
     return "▶ Connect";
@@ -68,7 +67,7 @@ export function ActivateButton(props: IActivateButtonProps) {
     if (isConnecting) {
       return "Activating...";
     }
-    if (isActivated && isSecondMobileButtonTapped) {
+    if (shouldStartConnection && isSecondMobileButtonTapped) {
       return "■ Disconnect";
     }
     return "▶ Connect";
@@ -90,13 +89,21 @@ export function ActivateButton(props: IActivateButtonProps) {
     );
   }
 
+  if (isHubStartError) {
+    return (
+      <button className={`${className} btn btn-danger`} disabled>
+        Connection Error
+      </button>
+    );
+  }
+
   return (
     <>
       {/* desktop - a single button / tap is fine */}
       <button
         disabled={isConnecting}
         onClick={onClick}
-        className={`${className} d-none d-md-block`}
+        className={`${className} btn btn-success d-none d-md-block`}
       >
         {buttonText}
       </button>
@@ -107,7 +114,7 @@ export function ActivateButton(props: IActivateButtonProps) {
             setIsFirstMobileButtonTapped(true);
             onClick();
           }}
-          className={`${className} d-block d-md-none`}
+          className={`${className} btn btn-success d-block d-md-none`}
         >
           Activate
         </button>
@@ -120,15 +127,10 @@ export function ActivateButton(props: IActivateButtonProps) {
             setIsSecondMobileButtonTapped(true);
             playLatestItem(items);
           }}
-          className={`${className} d-block d-md-none`}
+          className={`${className} btn btn-success d-block d-md-none`}
         >
           {mobileButtonText}
         </button>
-      )}
-      {isError && (
-        <div className="text-danger mb-2">
-          Error connecting. Please try again.
-        </div>
       )}
     </>
   );

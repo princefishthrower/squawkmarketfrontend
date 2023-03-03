@@ -8,19 +8,19 @@ export function Login() {
   const [email, setEmail] = useState("");
   const [isSending, setIsSending] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [isLoginError, setIsLoginError] = useState(false);
 
   const onSendMagicLink = async () => {
     if (!email) {
       return;
     }
     setIsSending(true);
-    setIsError(false);
+    setIsLoginError(false);
     const error = await sendMagicLink(email);
     if (error) {
       console.error(error);
       setIsSending(false);
-      setIsError(true);
+      setIsLoginError(true);
       return;
     }
     setIsComplete(true);
@@ -65,7 +65,7 @@ export function Login() {
           >
             {buttonText}
           </button>
-          {isError && (
+          {isLoginError && (
             <p className="text-danger">
               There was an error sending your magic link. Please try again.
             </p>

@@ -3,38 +3,45 @@ import { ActivateButton } from "./ActivateButton";
 import { SymbolInput } from "./SymbolInput";
 import { useState } from "react";
 import { useConnectToFeedByName } from "../../../../hooks/useConnectToFeedByName";
-import { HubConnection } from "@microsoft/signalr";
 import { useAppDispatch } from "../../../../hooks/useAppDispatch";
-import { useAppSelector } from "../../../../hooks/useAppSelector";
 import { IFeedConfigItem } from "../../../../interfaces/IFeedConfigItem";
 
 export interface IFeedRowItemProps {
+  isHubStartError: boolean;
   feed: IFeedConfigItem;
-  isConnecting: boolean;
-  connectionRef: React.MutableRefObject<HubConnection>
-  isError: boolean;
 }
 
 export function FeedRowItem(props: IFeedRowItemProps) {
-  const { feed, isConnecting, connectionRef, isError } = props;
-  const { volume } = useAppSelector(state => state.feed)
+  const { isHubStartError, feed } = props;
   const dispatch = useAppDispatch();
   const [symbol, setSymbol] = useState<string>("");
-  const [isActivated, setIsActivated] = useState<boolean>(false);
+  const [shouldStartConnection, setShouldStartConnection] =
+    useState<boolean>(false);
 
-  useConnectToFeedByName(volume, connectionRef, feed.feedName, isActivated, dispatch)
+  useConnectToFeedByName(feed.feedName, shouldStartConnection, dispatch);
 
-  const className = feed.feedName === "Custom" ? "col-12 my-4 user-select-none pe-none" : "col-12 my-4";
+  const className =
+    feed.feedName === "Custom"
+      ? "col-12 my-4 user-select-none pe-none"
+      : "col-12 my-4";
 
   return (
     <>
       <div className={className}>
         <div className="d-flex flex-row align-items-center">
           <div className="d-flex flex-column">
-            <p className={feed.isComingSoon ? "m-0 fw-bold text-muted" : "m-0 fw-bold"}>{feed.title}</p>
+            <p
+              className={
+                feed.isComingSoon ? "m-0 fw-bold text-muted" : "m-0 fw-bold"
+              }
+            >
+              {feed.title}
+            </p>
             <p className="my-3 text-muted">{feed.subtitle}</p>
             <div>
-              <small className="badge rounded-pill bg-secondary font-monospace fw-lighter">feed: {feed.feedName}</small>
+              <small className="badge rounded-pill bg-secondary font-monospace fw-lighter">
+                feed: {feed.feedName}
+              </small>
             </div>
           </div>
           {feed.hasSymbolInput && (
@@ -133,14 +140,24 @@ export function FeedRowItem(props: IFeedRowItemProps) {
                   </div>
                 </div>
               </div>
-              <SymbolInput value={symbol} onChange={(symbol) => setSymbol(symbol)}/>
+              <SymbolInput
+                value={symbol}
+                onChange={(symbol) => setSymbol(symbol)}
+              />
             </>
           )}
           {/* TODO: frequency */}
           {/* <FrequencyDropdown /> */}
           {/* TODO: minimum percent */}
           {/* <MinimumPercentDropdown /> */}
-          <ActivateButton feed={feed.feedName} className="ms-auto btn btn-success" isConnecting={isConnecting} isComingSoon={feed.isComingSoon} isActivated={isActivated} isError={isError} setIsActivated={setIsActivated} />
+          <ActivateButton
+            feed={feed.feedName}
+            className="ms-auto"
+            isComingSoon={false}
+            shouldStartConnection={shouldStartConnection}
+            setShouldStartConnection={setShouldStartConnection}
+            isHubStartError={isHubStartError}
+          />
         </div>
       </div>
       <hr className="m-0" />
