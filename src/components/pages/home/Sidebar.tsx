@@ -57,7 +57,8 @@ export function Sidebar(props: ISidebarProps) {
     const isWeekday = day > 0 && day < 6;
     const isMarketHours = hour >= 9 && hour < 16;
     // greater than 9:30 and less than 16:00
-    const isMarketMinutes = (hour == 9 && minute >= 30) || (hour <= 15 && minute < 60);
+    const isMarketMinutes =
+      (hour == 9 && minute >= 30) || (hour <= 15 && minute < 60);
     return isWeekday && isMarketHours && isMarketMinutes;
   };
 
@@ -77,6 +78,9 @@ export function Sidebar(props: ISidebarProps) {
   return (
     <div className="sidebar-height d-flex flex-column flex-shrink-0 bg-dark text-light overflow-auto">
       <div className="mt-3 font-monospace text-center">Live Feed Items</div>
+      <div className="m-3 font-monospace text-center">
+        {formatHHSSMM(nowEST)} EST
+      </div>
       {isMarketOpen ? (
         <div className="m-3 font-monospace text-center text-success">
           The market is open.
@@ -88,7 +92,8 @@ export function Sidebar(props: ISidebarProps) {
       )}
       {!isMarketWideFeedRunning && (
         <div className="mx-3 font-monospace text-center text-warning">
-          It is {formatHHSSMM(nowEST)} EST. The market-wide feed runs only from 8:00:00 AM to 5:00:00 PM EST. There is little to no squawk played during off hours.
+          The market-wide feed runs only from 8:00:00 AM to 5:00:00 PM EST.
+          There is little to no squawk played during off hours. Reach out to us if you'd like to subscribe and extend the market-wide feed to 24/7.
         </div>
       )}
       <FeedControls />
