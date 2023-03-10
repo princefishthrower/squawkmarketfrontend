@@ -7,6 +7,7 @@ type FeedState = {
   isConnecting: boolean;
   isError: boolean;
   items: Array<ISquawk>;
+  notificationsEnabled: boolean;
 };
 
 export const feedInitialState: FeedState = {
@@ -14,6 +15,7 @@ export const feedInitialState: FeedState = {
   isConnecting: false,
   isError: false,
   items: [],
+  notificationsEnabled: false,
 };
 
 export const feedSlice = createSlice({
@@ -44,6 +46,9 @@ export const feedSlice = createSlice({
     setIsError: (state, action: PayloadAction<boolean>) => {
       state.isError = action.payload;
     },
+    setNotificationsEnabled: (state, action: PayloadAction<boolean>) => {
+      state.notificationsEnabled = action.payload;
+    }
   },
 });
 
@@ -53,6 +58,7 @@ export const {
   setIsConnecting,
   setIsConnected,
   setIsError,
+  setNotificationsEnabled,
 } = feedSlice.actions;
 
 export default feedSlice.reducer;

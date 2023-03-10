@@ -5,4 +5,5 @@ export interface IFeedConfigItem {
   isPopular: boolean;
   hasSymbolInput: boolean;
   isComingSoon: boolean;
+  isLowLatency: boolean;
 }

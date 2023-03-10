@@ -4,8 +4,10 @@ import { HubConnectionState } from "@microsoft/signalr";
 import { AppDispatch } from "../redux/store";
 import { useAppSelector } from "./useAppSelector";
 import Hub from "../services/Hub";
+import { textToSpeech } from "../utils/textToSpeech";
 
 export const useConnectToFeedByName = (
+  lowLatencyFeed: boolean,
   feed: string,
   shouldStartConnection: boolean,
   dispatch: AppDispatch
@@ -28,6 +30,11 @@ export const useConnectToFeedByName = (
       );
       console.log('setting "on" message handler for connection');
       hub.hubConnection.on(feed, (item) => {
+        if (lowLatencyFeed) {
+          // use the browser's text to speech
+          textToSpeech(item.squawk)
+          return;
+        }
         console.log("calling on feed message", item);
         onFeedMessage(item, items, dispatch);
       });

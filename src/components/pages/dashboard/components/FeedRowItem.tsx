@@ -18,7 +18,7 @@ export function FeedRowItem(props: IFeedRowItemProps) {
   const [shouldStartConnection, setShouldStartConnection] =
     useState<boolean>(false);
 
-  useConnectToFeedByName(feed.feedName, shouldStartConnection, dispatch);
+  useConnectToFeedByName(feed.isLowLatency, feed.feedName, shouldStartConnection, dispatch);
 
   const className =
     feed.feedName === "Custom"

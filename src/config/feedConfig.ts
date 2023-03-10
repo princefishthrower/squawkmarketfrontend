@@ -8,6 +8,16 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: true,
     hasSymbolInput: false,
     isComingSoon: false,
+    isLowLatency: false
+  },
+  {
+    title: "SPX Momentum Plays",
+    subtitle: "A sub second latency feed for large second by second changes in SPX (>0.15%). Catch the momentum.",
+    feedName: "spx-momentum",
+    isPopular: true,
+    hasSymbolInput: false,
+    isComingSoon: true,
+    isLowLatency: false
   },
   {
     title: "U.S. Economic Prints",
@@ -17,6 +27,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: true,
     hasSymbolInput: false,
     isComingSoon: false,
+    isLowLatency: false
   },
   {
     title: "Eurozone Economic Prints",
@@ -26,6 +37,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: true,
     hasSymbolInput: false,
     isComingSoon: false,
+    isLowLatency: false
   },
   {
     title: "Chinese Economic Prints",
@@ -35,6 +47,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: false,
     hasSymbolInput: false,
     isComingSoon: false,
+    isLowLatency: false
   },
   {
     title: "Option Flows",
@@ -44,6 +57,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: true,
     hasSymbolInput: false,
     isComingSoon: true,
+    isLowLatency: false
   },
   {
     title: "U.S. Bond Auctions",
@@ -52,6 +66,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: true,
     hasSymbolInput: false,
     isComingSoon: true,
+    isLowLatency: false
   },
   {
     title: "Currencies",
@@ -60,6 +75,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: true,
     hasSymbolInput: false,
     isComingSoon: true,
+    isLowLatency: false
   },
   {
     title: "SPX",
@@ -68,6 +84,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: true,
     hasSymbolInput: false,
     isComingSoon: true,
+    isLowLatency: false
   },
   {
     title: "SPY",
@@ -76,6 +93,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: true,
     hasSymbolInput: false,
     isComingSoon: true,
+    isLowLatency: false
   },
   {
     title: "QQQ",
@@ -85,6 +103,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: true,
     hasSymbolInput: false,
     isComingSoon: true,
+    isLowLatency: false
   },
   {
     title: "IWM",
@@ -94,6 +113,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: false,
     hasSymbolInput: false,
     isComingSoon: true,
+    isLowLatency: false
   },
   {
     title: "BTC",
@@ -102,6 +122,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: false,
     hasSymbolInput: false,
     isComingSoon: true,
+    isLowLatency: false
   },
   {
     title: "ETH",
@@ -110,6 +131,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: false,
     hasSymbolInput: false,
     isComingSoon: true,
+    isLowLatency: false
   },
   {
     title: "TSLA",
@@ -118,6 +140,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: true,
     hasSymbolInput: false,
     isComingSoon: true,
+    isLowLatency: false
   },
   {
     title: "Unusual Trading Volume",
@@ -126,6 +149,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: true,
     hasSymbolInput: false,
     isComingSoon: false,
+    isLowLatency: false
   },
   {
     title: "Most volatile",
@@ -134,6 +158,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: true,
     hasSymbolInput: false,
     isComingSoon: false,
+    isLowLatency: false
   },
   {
     title: "Crypto News",
@@ -142,6 +167,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: true,
     hasSymbolInput: false,
     isComingSoon: false,
+    isLowLatency: false
   },
   {
     title: "Most Active",
@@ -150,6 +176,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: false,
     hasSymbolInput: false,
     isComingSoon: false,
+    isLowLatency: false
   },
   {
     title: "New Highs",
@@ -158,6 +185,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: false,
     hasSymbolInput: false,
     isComingSoon: false,
+    isLowLatency: false
   },
   {
     title: "New Lows",
@@ -166,6 +194,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: false,
     hasSymbolInput: false,
     isComingSoon: false,
+    isLowLatency: false
   },
   {
     title: "Overbought",
@@ -174,6 +203,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: false,
     hasSymbolInput: false,
     isComingSoon: false,
+    isLowLatency: false
   },
   {
     title: "Oversold",
@@ -182,6 +212,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: false,
     hasSymbolInput: false,
     isComingSoon: false,
+    isLowLatency: false
   },
   {
     title: "Top Gainers",
@@ -190,6 +221,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: false,
     hasSymbolInput: false,
     isComingSoon: false,
+    isLowLatency: false
   },
   {
     title: "Top Losers",
@@ -198,6 +230,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: false,
     hasSymbolInput: false,
     isComingSoon: false,
+    isLowLatency: false
   },
   {
     title: "Unusual Options Volume",
@@ -206,6 +239,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: false,
     hasSymbolInput: false,
     isComingSoon: true,
+    isLowLatency: false
   },
 
   {
@@ -215,6 +249,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: false,
     hasSymbolInput: false,
     isComingSoon: true,
+    isLowLatency: false
   },
   {
     title: "Top Insider Selling",
@@ -223,6 +258,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: false,
     hasSymbolInput: false,
     isComingSoon: true,
+    isLowLatency: false
   },
   {
     title: "Upcoming Earnings",
@@ -231,6 +267,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: false,
     hasSymbolInput: false,
     isComingSoon: true,
+    isLowLatency: false
   },
   {
     title: "Earnings Reports",
@@ -239,6 +276,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: false,
     hasSymbolInput: false,
     isComingSoon: true,
+    isLowLatency: false
   },
   {
     title: "Analysts - All",
@@ -248,6 +286,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: false,
     hasSymbolInput: false,
     isComingSoon: true,
+    isLowLatency: false
   },
   {
     title: "Analyst Upgrades",
@@ -256,6 +295,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: false,
     hasSymbolInput: false,
     isComingSoon: true,
+    isLowLatency: false
   },
   {
     title: "Analyst Downgrades",
@@ -264,6 +304,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: false,
     hasSymbolInput: false,
     isComingSoon: true,
+    isLowLatency: false
   },
   {
     title: "Custom",
@@ -272,5 +313,6 @@ export const feedConfig: Array<IFeedConfigItem> = [
     isPopular: false,
     hasSymbolInput: true,
     isComingSoon: true,
+    isLowLatency: false
   },
 ];

@@ -22,7 +22,7 @@ export function Home() {
   const feed = "market-wide";
 
   // connect to the free feed
-  useConnectToFeedByName(feed, shouldStartConnection, dispatch);
+  useConnectToFeedByName(false, feed, shouldStartConnection, dispatch);
 
   return (
     <div className="container-fluid">
