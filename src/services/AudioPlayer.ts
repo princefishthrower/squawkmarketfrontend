@@ -56,19 +56,7 @@ export class AudioPlayer {
         this.audio.muted = true;
       }
       this.audio.src = `data:audio/wav;base64,${item}`;
-      this.audio.volume = volume * 0.1;
-
-      // if text to speech gets too expensive, can always use this:
-      // if (typeof window !== "undefined") {
-      //   var speechSynthesisUtterance = new SpeechSynthesisUtterance();
-      //   speechSynthesisUtterance.text = text;
-      //   speechSynthesisUtterance.lang = "en-US";
-      //   speechSynthesisUtterance.volume = 1;
-      //   speechSynthesisUtterance.rate = 1;
-      //   speechSynthesisUtterance.pitch = 1;
-      //   speechSynthesis.speak(speechSynthesisUtterance);
-      // }
-      
+      this.audio.volume = volume * 0.1;      
       // try / catch in rare case of non-interaction with page
       try {
         this.audio.play();
