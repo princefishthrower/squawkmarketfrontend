@@ -12,7 +12,7 @@ export const feedConfig: Array<IFeedConfigItem> = [
   },
   {
     title: "SPX Momentum Plays",
-    subtitle: "A sub second latency feed for large second by second changes in SPX (>0.15%). Catch the momentum.",
+    subtitle: "A sub second latency feed for second by second changes in SPX (change >0.15%). Catch the momentum.",
     feedName: "spx-momentum",
     isPopular: true,
     hasSymbolInput: false,
