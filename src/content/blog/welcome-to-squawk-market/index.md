@@ -13,13 +13,15 @@ If you are a seasoned trader, you may be familiar this term already. However, if
 
 First, [sign up to access the dashboard](/subscribe), or [login](/login) to Squawk Market if you have an account. You'll get a link to the [dashboard](/dashboard) in your email. Once you're in, you'll see the wide array of feeds that we offer, with title, description, and a 'connect' button:
 
+<div class="text-center">
 <img alt="Dashboard with no feeds activated" src="/images/activateFeeds.png" class="img-fluid border rounded p-1 m-3"/>
-
+</div>
 
 You can click 'connect' on any one of them, and as soon as you see 'disconnect', you're connected to that feed! You'll see live squawks start to collect in the sidebar (if on desktop), and below (if on mobile):
 
+<div class="text-center">
 <img alt="Dashboard with market wide feed activated" src="/images/feedsActivated.png" class="img-fluid border rounded p-1 m-3"/>
-
+</div>
 
 You can click on any squawk again at any time to replay the full squawk. Soon we'll include the original link to the source of the squawk, so you can go directly the full article or source.
 
