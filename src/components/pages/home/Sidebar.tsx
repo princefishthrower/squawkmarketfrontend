@@ -86,11 +86,11 @@ export function Sidebar(props: ISidebarProps) {
       </div>
       {isMarketOpen ? (
         <div className="mb-3 font-monospace text-center text-success">
-          The market is open.
+          The NYSE is open.
         </div>
       ) : (
         <div className="mb-3 font-monospace text-center text-danger">
-          The market is closed.
+          The NYSE is closed.
         </div>
       )}
       {!isMarketWideFeedRunning && (
